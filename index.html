@@ -1,0 +1,163 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{max-width:560px;margin:0 auto;padding:1.5rem 1rem}
+.hdr{text-align:center;margin-bottom:1.5rem}
+.hdr h1{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+.hdr p{font-size:13px;color:var(--color-text-secondary);margin-top:4px}
+.arabic{font-size:22px;color:var(--color-text-secondary);margin-bottom:6px}
+.prog{display:flex;gap:4px;margin-bottom:1.5rem}
+.prog-item{flex:1;text-align:center}
+.prog-bar{height:3px;border-radius:2px;margin-bottom:4px;background:var(--color-border-tertiary)}
+.prog-bar.active{background:#1D9E75}
+.prog-label{font-size:10px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.05em}
+.prog-label.active{color:#0F6E56}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem}
+.step-title{font-size:17px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.step-desc{font-size:13px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:1rem}
+.choices{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem}
+.choice-btn{padding:10px 24px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);font-size:14px;cursor:pointer;font-family:inherit;transition:all .15s}
+.choice-btn:hover{background:var(--color-background-secondary)}
+.choice-btn.sel{border:1.5px solid #1D9E75;background:#E1F5EE;color:#085041}
+.row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.row:last-child{border-bottom:none}
+.row label{font-size:14px;color:var(--color-text-primary)}
+.counter{display:flex;align-items:center;gap:10px}
+.ctr-btn{width:28px;height:28px;border-radius:50%;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
+.ctr-btn:hover{background:var(--color-background-secondary)}
+.ctr-val{font-size:15px;font-weight:500;color:var(--color-text-primary);min-width:20px;text-align:center}
+.toggle{display:flex;gap:4px}
+.tog-btn{padding:6px 16px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);font-size:13px;cursor:pointer;font-family:inherit}
+.tog-btn.on{border:1px solid #1D9E75;background:#E1F5EE;color:#085041}
+.verse-note{margin-top:1rem;padding:10px 14px;background:var(--color-background-secondary);border-left:2px solid #1D9E75;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;font-size:12px;color:var(--color-text-secondary);line-height:1.6}
+.verse-ref{color:#0F6E56;font-weight:500}
+.nav{display:flex;justify-content:space-between;margin-top:12px}
+.nav-btn{padding:9px 22px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);font-size:14px;cursor:pointer;font-family:inherit}
+.nav-btn:hover{background:var(--color-background-secondary)}
+.nav-btn.prim{border:0.5px solid #1D9E75;color:#0F6E56;background:var(--color-background-primary)}
+.nav-btn.prim:hover{background:#E1F5EE}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.res-header{margin-bottom:1rem}
+.dist-bar{display:flex;height:24px;border-radius:var(--border-radius-md);overflow:hidden;border:0.5px solid var(--color-border-tertiary);margin-bottom:1rem}
+.heir-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--border-radius-md);background:var(--color-background-secondary);margin-bottom:6px}
+.heir-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.heir-info{flex:1}
+.heir-name{font-size:14px;color:var(--color-text-primary)}
+.heir-basis{font-size:11px;color:var(--color-text-tertiary);margin-top:2px}
+.heir-frac{text-align:right}
+.heir-f{font-size:16px;font-weight:500;color:var(--color-text-primary)}
+.heir-p{font-size:11px;color:var(--color-text-secondary)}
+.total-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:var(--border-radius-md);border:0.5px solid #9FE1CB;background:#E1F5EE;margin-top:10px}
+.total-label{font-size:13px;color:#085041}
+.total-val{font-size:14px;font-weight:500;color:#0F6E56}
+.alert{margin-top:10px;padding:10px 14px;border-radius:var(--border-radius-md);background:#FAEEDA;border-left:2px solid #EF9F27;font-size:12px;color:#633806;line-height:1.6}
+.no-heirs{text-align:center;padding:2rem 0;color:var(--color-text-secondary);font-size:14px}
+</style>
+
+<div class="wrap">
+  <div class="hdr">
+    <div class="arabic">﷽</div>
+    <h1>Islamic inheritance calculator</h1>
+    <p>Based on Surah An-Nisa · Verses 4:11, 4:12, 4:176</p>
+  </div>
+  <div class="prog" id="prog"></div>
+  <div class="card" id="card"></div>
+  <div class="nav">
+    <button class="nav-btn" id="btn-back" onclick="goBack()">← Back</button>
+    <button class="nav-btn prim" id="btn-next" onclick="goNext()">Next →</button>
+  </div>
+</div>
+
+<script>
+const gcd=(a,b)=>b===0?a:gcd(b,a%b);
+const F=(n,d)=>{if(n<=0||d<=0)return{n:0,d:1};const g=gcd(n,d);return{n:n/g,d:d/g}};
+const fadd=(a,b)=>F(a.n*b.d+b.n*a.d,a.d*b.d);
+const fsub=(a,b)=>{const n=a.n*b.d-b.n*a.d;return n<=0?{n:0,d:1}:F(n,a.d*b.d)};
+const fval=f=>f.n/f.d;
+const fpct=f=>(fval(f)*100).toFixed(1)+'%';
+const fstr=f=>{if(f.n===0)return'0';if(f.d===1)return`${f.n}`;return`${f.n}/${f.d}`};
+
+const STEPS=['Deceased','Spouse','Children','Parents','Siblings','Results'];
+const PALETTE=['#1D9E75','#BA7517','#185FA5','#993556','#A32D2D','#534AB7','#3B6D11','#854F0B'];
+
+let step=0;
+let S={gender:null,hasHusband:false,numWives:0,sons:0,daughters:0,fatherAlive:false,motherAlive:false,fullBrothers:0,fullSisters:0,uterineSiblings:0};
+
+function compute(){
+  const{gender,hasHusband,numWives,sons,daughters,fatherAlive,motherAlive,fullBrothers,fullSisters,uterineSiblings}=S;
+  const hasChild=sons>0||daughters>0,hasSons=sons>0,hasDaus=daughters>0;
+  const sibTotal=fullBrothers+fullSisters+uterineSiblings;
+  const heirs=[];let used={n:0,d:1};let ci=0;
+  function add(name,f,verse,basis){
+    if(fval(f)>0.00001){heirs.push({name,frac:f,verse,basis,color:PALETTE[ci++%PALETTE.length]});used=fadd(used,f);}
+  }
+  if(gender==='male'&&numWives>0){
+    const tot=hasChild?{n:1,d:8}:{n:1,d:4};
+    add(numWives===1?'Wife':`Each wife (×${numWives})`,F(tot.n,tot.d*numWives),'4:12',`${hasChild?'1/8':'1/4'} total${numWives>1?` ÷ ${numWives} wives`:''}`);}
+  if(gender==='female'&&hasHusband)add('Husband',hasChild?{n:1,d:4}:{n:1,d:2},'4:12',hasChild?'1/4 — has children':'1/2 — no children');
+  if(motherAlive)add('Mother',(hasChild||sibTotal>=2)?{n:1,d:6}:{n:1,d:3},'4:11',(hasChild||sibTotal>=2)?'1/6':'1/3');
+  if(fatherAlive&&hasChild)add('Father',{n:1,d:6},'4:11','1/6 fixed — has children');
+  if(hasDaus&&!hasSons){const tot=daughters===1?{n:1,d:2}:{n:2,d:3};add(daughters===1?'Daughter':`Each daughter (×${daughters})`,F(tot.n,tot.d*daughters),'4:11',daughters===1?'1/2 — sole daughter':`2/3 shared ÷ ${daughters}`);}
+  if(!hasChild&&uterineSiblings>0){const tot=uterineSiblings===1?{n:1,d:6}:{n:1,d:3};add(uterineSiblings===1?'Uterine sibling':`Each uterine sibling (×${uterineSiblings})`,F(tot.n,tot.d*uterineSiblings),'4:12',uterineSiblings===1?'1/6':`1/3 shared ÷ ${uterineSiblings}`);}
+  if(!hasChild&&!fatherAlive&&fullBrothers===0&&fullSisters>0){const tot=fullSisters===1?{n:1,d:2}:{n:2,d:3};add(fullSisters===1?'Full sister':`Each full sister (×${fullSisters})`,F(tot.n,tot.d*fullSisters),'4:176',fullSisters===1?'1/2':`2/3 shared ÷ ${fullSisters}`);}
+  const res=fsub({n:1,d:1},used);
+  if(fval(res)>0.00001){
+    if(hasSons){
+      if(hasDaus){const u=sons*2+daughters;add(sons===1?'Son':`Each son (×${sons})`,F(res.n*2,res.d*u),'4:11','2 parts of residue');add(daughters===1?'Daughter':`Each daughter (×${daughters})`,F(res.n,res.d*u),'4:11','1 part of residue');}
+      else add(sons===1?'Son':`Each son (×${sons})`,F(res.n,res.d*sons),'4:11','Residuary heir');}
+    else if(!hasChild&&fatherAlive){const fi=heirs.findIndex(h=>h.name==='Father');if(fi>=0){heirs[fi]={...heirs[fi],frac:fadd(heirs[fi].frac,res),basis:'1/6 fixed + residue'};}else add('Father',res,'4:11','Residuary — no children');}
+    else if(!hasChild&&!fatherAlive){
+      if(fullBrothers>0&&fullSisters>0){const u=fullBrothers*2+fullSisters;add(fullBrothers===1?'Full brother':`Each full brother (×${fullBrothers})`,F(res.n*2,res.d*u),'4:176','2 parts — male share');add(fullSisters===1?'Full sister':`Each full sister (×${fullSisters})`,F(res.n,res.d*u),'4:176','1 part — female share');}
+      else if(fullBrothers>0)add(fullBrothers===1?'Full brother':`Each full brother (×${fullBrothers})`,F(res.n,res.d*fullBrothers),'4:176','Residuary');}}
+  const total=heirs.reduce((a,h)=>fadd(a,h.frac),{n:0,d:1});
+  return{heirs,total,isAul:fval(total)>1.001,hasRemainder:fval(total)<0.999&&heirs.length>0};}
+
+function Counter(label,key,max=10){return`<div class="row"><label>${label}</label><div class="counter"><button class="ctr-btn" onclick="adj('${key}',-1)">−</button><span class="ctr-val">${S[key]}</span><button class="ctr-btn" onclick="adj('${key}',1,${max})">+</button></div></div>`;}
+function Toggle(label,key){return`<div class="row"><label>${label}</label><div class="toggle"><button class="tog-btn ${S[key]?'on':''}" onclick="tog('${key}',true)">Yes</button><button class="tog-btn ${!S[key]?'on':''}" onclick="tog('${key}',false)">No</button></div></div>`;}
+
+function renderStep(){
+  const c=document.getElementById('card');
+  if(step===0)c.innerHTML=`<p class="step-title">The deceased</p><p class="step-desc">Select the gender of the person who has passed away</p><div class="choices"><button class="choice-btn ${S.gender==='male'?'sel':''}" onclick="pick('gender','male')">Male</button><button class="choice-btn ${S.gender==='female'?'sel':''}" onclick="pick('gender','female')">Female</button></div>`;
+  else if(step===1){let html=`<p class="step-title">Surviving spouse</p>`;
+    if(S.gender==='male'){html+=`<p class="step-desc">How many wives does the deceased leave?</p>${Counter('Number of wives','numWives',4)}`;}
+    else html+=`<p class="step-desc">Is there a surviving husband?</p>${Toggle('Husband is surviving','hasHusband')}`;
+    html+=`<div class="verse-note"><span class="verse-ref">4:12</span> — Husband receives ½ (no children) or ¼ (has children). Wife/wives share ¼ or ⅛ total, depending on whether there are children.</div>`;c.innerHTML=html;}
+  else if(step===2)c.innerHTML=`<p class="step-title">Children</p><p class="step-desc">How many sons and daughters did the deceased leave?</p>${Counter('Sons','sons')}${Counter('Daughters','daughters')}<div class="verse-note"><span class="verse-ref">4:11</span> — Sons and daughters share the residue 2:1. With only daughters: one daughter gets ½; two or more share ⅔.</div>`;
+  else if(step===3)c.innerHTML=`<p class="step-title">Parents</p><p class="step-desc">Which parents of the deceased are still living?</p>${Toggle('Father is alive','fatherAlive')}${Toggle('Mother is alive','motherAlive')}<div class="verse-note"><span class="verse-ref">4:11</span> — Each parent receives ⅙ when the deceased leaves children. Mother receives ⅓ if no children and fewer than two siblings of the deceased are living.</div>`;
+  else if(step===4)c.innerHTML=`<p class="step-title">Siblings</p><p class="step-desc">Siblings inherit only when there are <em>no children</em> and <em>no surviving father</em>.</p>${Counter('Full brothers','fullBrothers')}${Counter('Full sisters','fullSisters')}${Counter('Uterine (maternal half) siblings','uterineSiblings')}<div class="verse-note"><span class="verse-ref">4:176</span> — One sister gets ½; two or more share ⅔. Brothers with sisters: 2:1 ratio. <span class="verse-ref">4:12</span> — One uterine sibling gets ⅙; two or more share ⅓.</div>`;
+  else if(step===5){
+    const r=compute();
+    if(!r.heirs.length){c.innerHTML='<div class="no-heirs">No qualifying heirs identified. Please review your selections.</div>';return;}
+    const totalPct=(fval(r.total)*100).toFixed(1);
+    let bar=r.heirs.map(h=>`<div style="width:${Math.min(100,(fval(h.frac)/Math.max(fval(r.total),0.001))*100).toFixed(2)}%;background:${h.color}" title="${h.name}"></div>`).join('');
+    if(r.hasRemainder&&!r.isAul)bar+=`<div style="flex:1;background:var(--color-background-tertiary)"></div>`;
+    let rows=r.heirs.map(h=>`<div class="heir-row"><div class="heir-dot" style="background:${h.color}"></div><div class="heir-info"><div class="heir-name">${h.name}</div><div class="heir-basis">An-Nisa ${h.verse} · ${h.basis}</div></div><div class="heir-frac"><div class="heir-f">${fstr(h.frac)}</div><div class="heir-p">${fpct(h.frac)}</div></div></div>`).join('');
+    let alerts='';
+    if(r.isAul)alerts+=`<div class="alert"><strong>ʿAwl (overcrowding):</strong> fixed shares exceed the estate. In classical fiqh, all shares are reduced proportionally. Consult a qualified scholar.</div>`;
+    if(r.hasRemainder&&!r.isAul)alerts+=`<div class="alert"><strong>Remainder (radd):</strong> ${(100-parseFloat(totalPct)).toFixed(1)}% is unassigned. This may be returned to share-holders proportionally, or directed to Bait al-Mal. Consult a qualified scholar.</div>`;
+    c.innerHTML=`<div class="res-header"><p class="step-title">Inheritance distribution</p><p class="step-desc">Each heir's share of the estate:</p></div><div class="dist-bar">${bar}</div>${rows}<div class="total-row"><span class="total-label">Total assigned</span><span class="total-val">${fstr(r.total)} · ${totalPct}%</span></div>${alerts}`;}
+}
+
+function renderProg(){
+  document.getElementById('prog').innerHTML=STEPS.map((s,i)=>`<div class="prog-item"><div class="prog-bar ${i<=step?'active':''}"></div><span class="prog-label ${i===step?'active':''}">${s}</span></div>`).join('');
+}
+
+function renderNav(){
+  const back=document.getElementById('btn-back');
+  const next=document.getElementById('btn-next');
+  back.disabled=step===0;
+  if(step===5){next.textContent='↺ Start over';next.className='nav-btn prim';}
+  else{next.textContent=step===4?'Calculate →':'Next →';next.className='nav-btn prim';next.disabled=step===0&&!S.gender;}
+}
+
+function render(){renderProg();renderStep();renderNav();}
+
+function pick(k,v){S[k]=v;render();}
+function adj(k,d,max=10){S[k]=Math.max(0,Math.min(max,S[k]+d));render();}
+function tog(k,v){S[k]=v;render();}
+function goNext(){if(step<5)step++;else{step=0;S={gender:null,hasHusband:false,numWives:0,sons:0,daughters:0,fatherAlive:false,motherAlive:false,fullBrothers:0,fullSisters:0,uterineSiblings:0};}render();}
+function goBack(){if(step>0)step--;render();}
+
+render();
+</script>
