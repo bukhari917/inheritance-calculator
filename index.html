@@ -7,6 +7,7 @@
 <style>
 :root {
   --font-sans: system-ui, -apple-system, sans-serif;
+  --font-urdu: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Nafees Regular', Arial, sans-serif;
   --color-text-primary: #111827;
   --color-text-secondary: #4B5563;
   --color-text-tertiary: #9CA3AF;
@@ -19,14 +20,29 @@
   --border-radius-lg: 12px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-sans); background: #f9fafb;}
-.wrap{max-width:560px;margin:0 auto;padding:1.5rem 1rem}
+body{font-family:var(--font-sans); background: #f9fafb; transition: all 0.2s;}
+
+/* RTL Support */
+body.rtl { font-family: var(--font-urdu); direction: rtl; text-align: right; }
+body.rtl .back-btn { left: auto; right: 0; }
+body.rtl .lang-btn { right: auto; left: 0; }
+body.rtl .verse-note { border-left: none; border-right: 2px solid #1D9E75; border-radius: var(--border-radius-md) 0 0 var(--border-radius-md); }
+body.rtl .alert { border-left: none; border-right: 2px solid #EF9F27; }
+body.rtl .alert.success { border-left: none; border-right: 2px solid #1D9E75; }
+body.rtl .val-input { text-align: left; }
+body.rtl .heir-frac { text-align: left; }
+body.rtl .tracker-content { padding-right: 12px; padding-left: 0; }
+
+.wrap{max-width:560px;margin:0 auto;padding:1.5rem 1rem; position: relative;}
 .hdr{text-align:center;margin-bottom:1.5rem;position:relative;}
-.back-btn{position:absolute;left:0;top:50%;transform:translateY(-50%);background:none;border:none;color:#1D9E75;font-size:14px;cursor:pointer;font-weight:500;display:none;}
+.back-btn{position:absolute;left:0;top:50%;transform:translateY(-50%);background:none;border:none;color:#1D9E75;font-size:14px;cursor:pointer;font-weight:500;display:none;font-family:inherit;}
 .back-btn:hover{text-decoration:underline;}
+.lang-btn{position:absolute;right:0;top:50%;transform:translateY(-50%);background:var(--color-background-secondary);border:1px solid var(--color-border-secondary);color:var(--color-text-primary);font-size:12px;padding:4px 10px;border-radius:16px;cursor:pointer;font-weight:600;font-family:inherit;}
+.lang-btn:hover{background:var(--color-border-tertiary);}
+
 .hdr h1{font-size:20px;font-weight:500;color:var(--color-text-primary)}
 .hdr p{font-size:13px;color:var(--color-text-secondary);margin-top:4px}
-.arabic{font-size:22px;color:var(--color-text-secondary);margin-bottom:6px}
+.arabic{font-size:22px;color:var(--color-text-secondary);margin-bottom:6px; font-family: sans-serif;}
 
 /* Grid Menu */
 .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:1rem;}
@@ -67,20 +83,20 @@ body{font-family:var(--font-sans); background: #f9fafb;}
 .val-input{width:120px;padding:8px 12px;border-radius:var(--border-radius-md);border:1px solid var(--color-border-secondary);font-size:15px;text-align:right;font-family:inherit;}
 .val-input:focus{outline:none;border-color:#1D9E75;box-shadow: 0 0 0 2px rgba(29,158,117,0.2);}
 
-.verse-note, .alert{margin-top:1rem;padding:10px 14px;border-radius:var(--border-radius-md);font-size:12px;line-height:1.6}
+.verse-note, .alert{margin-top:1rem;padding:10px 14px;border-radius:var(--border-radius-md);font-size:13px;line-height:1.6}
 .verse-note{background:var(--color-background-secondary);border-left:2px solid #1D9E75;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;color:var(--color-text-secondary);}
 .verse-ref{color:#0F6E56;font-weight:500}
 .alert{background:#FAEEDA;border-left:2px solid #EF9F27;color:#633806;}
 .alert.success{background:#E1F5EE;border-left:2px solid #1D9E75;color:#085041;}
 
-.nav{display:flex;justify-content:space-between;margin-top:12px}
-.nav-btn{padding:9px 22px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);font-size:14px;cursor:pointer;font-family:inherit;font-weight:500;transition:all 0.15s;}
+.nav{display:flex;justify-content:space-between;margin-top:12px; gap:8px;}
+.nav-btn{padding:9px 22px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);font-size:14px;cursor:pointer;font-family:inherit;font-weight:500;transition:all 0.15s; flex:1;}
 .nav-btn:hover:not(:disabled){background:var(--color-background-secondary)}
 .nav-btn.prim{border:0.5px solid #1D9E75;color:white;background:#1D9E75}
 .nav-btn.prim:hover:not(:disabled){background:#15805e}
 .nav-btn:disabled{opacity:.4;cursor:not-allowed}
 
-/* Results Formatting (Inheritance/Zakat) */
+/* Results Formatting */
 .dist-bar{display:flex;height:24px;border-radius:var(--border-radius-md);overflow:hidden;border:0.5px solid var(--color-border-tertiary);margin-bottom:1rem}
 .heir-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--border-radius-md);background:var(--color-background-secondary);margin-bottom:6px}
 .heir-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
@@ -94,13 +110,12 @@ body{font-family:var(--font-sans); background: #f9fafb;}
 .total-label{font-size:14px;color:#085041;font-weight:500;}
 .total-val{font-size:16px;font-weight:600;color:#0F6E56}
 
-/* Visual Trackers (Umrah & Hajj) */
+/* Visual Trackers */
 .tracker-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; }
 .tracker-card { display: flex; flex-direction: column; border: 1px solid var(--color-border-secondary); border-radius: var(--border-radius-md); overflow: hidden; background: var(--color-background-primary); cursor: pointer; transition: all 0.2s; }
 .tracker-card:hover { border-color: #1D9E75; }
 .tracker-card.completed { background: #F0FDF4; border-color: #9FE1CB; opacity: 0.85; }
 .tracker-img-wrap { width: 100%; height: 120px; background: var(--color-background-tertiary); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--color-text-tertiary); font-size: 13px; }
-.tracker-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
 .tracker-content { padding: 1rem; display: flex; align-items: center; gap: 12px; }
 .tracker-text { flex: 1; }
 .tracker-title { font-size: 15px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 4px; }
@@ -110,7 +125,7 @@ body{font-family:var(--font-sans); background: #f9fafb;}
 .tracker-card.completed .tracker-check { background: #1D9E75; border-color: #1D9E75; color: white; }
 .status-bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--color-background-secondary); border-radius: var(--border-radius-md); margin-bottom: 1rem; font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
 
-/* Hifdh Viewer */
+/* Hifdh */
 .hifdh-viewer { width:100%; min-height:480px; background:var(--color-background-secondary); border-radius:var(--border-radius-md); overflow:hidden; display:flex; align-items:center; justify-content:center; position:relative; border: 1px solid var(--color-border-tertiary); margin-bottom: 1rem; }
 .hifdh-img { max-width:100%; height:auto; display:block; transition: filter 0.3s ease, opacity 0.3s ease; }
 .hifdh-img.hidden-mode { filter: blur(12px); opacity: 0.4; }
@@ -127,7 +142,8 @@ body{font-family:var(--font-sans); background: #f9fafb;}
 
 <div class="wrap">
   <div class="hdr">
-    <button id="btn-back" class="back-btn" onclick="openMenu()">← Back to Menu</button>
+    <button id="btn-back" class="back-btn" onclick="openMenu()">← Back</button>
+    <button id="btn-lang" class="lang-btn" onclick="toggleLang()">اردو</button>
     <div class="arabic">﷽</div>
     <h1 id="app-title">Islamic Knowledge Hub</h1>
     <p id="app-desc">Select a tool to begin</p>
@@ -139,6 +155,242 @@ body{font-family:var(--font-sans); background: #f9fafb;}
 </div>
 
 <script>
+// ==== i18n DICTIONARY ====
+const DICT = {
+  en: {
+    appTitle: "Islamic Knowledge Hub",
+    appDesc: "Select a tool to begin",
+    backMenu: "← Back to Menu",
+    btnLang: "اردو",
+    menuInh: "Inheritance",
+    menuZak: "Zakat",
+    menuUmr: "Umrah Tracker",
+    menuHaj: "Hajj Tracker",
+    menuHif: "Hifdh Quran",
+    menuEnum: "E-Number Checker",
+    comingSoon: "Coming Soon",
+    underConst: "This tool is being built. Check back soon!",
+    btnBack: "← Back",
+    btnNext: "Next →",
+    btnStartOver: "↺ Start over",
+    btnCalc: "Calculate →",
+    btnYes: "Yes",
+    btnNo: "No",
+    male: "Male",
+    female: "Female",
+    resetProg: "Reset Progress",
+    
+    // Zakat
+    zTitle: "Zakat Calculator",
+    zDesc: "Calculate your 2.5% obligatory charity",
+    zSteps: ['Assets', 'Debts', 'Results'],
+    zS1T: "Zakatable Assets",
+    zS1D: "Enter the value of your liquid and trading assets held for a full lunar year.",
+    zS1Cash: "Cash in hand and bank accounts",
+    zS1Gold: "Value of Gold owned",
+    zS1Silver: "Value of Silver owned",
+    zS1Biz: "Business inventory & trade goods",
+    zS1Note: "Leave empty if you do not own a certain asset type.",
+    zS2T: "Deductible Debts",
+    zS2D: "Enter any immediate, short-term debts that must be paid.",
+    zS2Debt: "Short-term debts & immediate bills",
+    zS2Note: "Long-term debts (e.g., mortgages) are generally not fully deducted; consult a scholar.",
+    zS3T: "Zakat Results",
+    zS3Tot: "Total Assets",
+    zS3Minus: "Minus Debts",
+    zS3Net: "Net Zakatable Wealth",
+    zS3NisabReach: "<strong>Nisab reached.</strong> Your net wealth is above the approx. $5000 threshold.",
+    zS3Due: "Total Zakat Due (2.5%)",
+    zS3Below: "<strong>Below Nisab.</strong> Your wealth is below the threshold. Zakat is not obligatory.",
+    zS3NotDue: "Total Zakat Due",
+    
+    // Inheritance
+    iTitle: "Inheritance Calculator",
+    iDesc: "Based on Surah An-Nisa",
+    iSteps: ['Deceased', 'Spouse', 'Children', 'Parents', 'Siblings', 'Results'],
+    iS1T: "The deceased",
+    iS1D: "Select the gender of the person who has passed away",
+    iS2T: "Surviving spouse",
+    iS2DWife: "How many wives does the deceased leave?",
+    iS2DHus: "Is there a surviving husband?",
+    iS2NumWives: "Number of wives",
+    iS2HusAlive: "Husband is surviving",
+    iS2Note: "Husband receives ½ (no children) or ¼ (has children). Wife/wives share ¼ or ⅛ total.",
+    iS3T: "Children",
+    iS3D: "How many sons and daughters did the deceased leave?",
+    iS3Sons: "Sons",
+    iS3Daus: "Daughters",
+    iS3Note: "Sons and daughters share the residue 2:1.",
+    iS4T: "Parents",
+    iS4D: "Which parents of the deceased are still living?",
+    iS4Dad: "Father is alive",
+    iS4Mom: "Mother is alive",
+    iS4Note: "Each parent receives ⅙ when the deceased leaves children.",
+    iS5T: "Siblings",
+    iS5D: "Siblings inherit only when there are no children and no surviving father.",
+    iS5FBro: "Full brothers",
+    iS5FSis: "Full sisters",
+    iS5USib: "Uterine siblings",
+    iS5Note: "Brothers and sisters share 2:1. Uterine siblings share equally.",
+    iS6NoHeirs: "No qualifying heirs identified. Please review selections.",
+    iS6Assigned: "Total assigned",
+    
+    // Trackers
+    uTitle: "Umrah Visual Tracker",
+    uDesc: "Follow the steps to complete your Umrah",
+    hTitle: "Hajj Visual Tracker",
+    hDesc: "Follow the primary rituals of Hajj",
+    tProg: "Progress",
+    tSteps: "steps",
+    tImgPlace: "[ Image Placeholder: ",
+    tStepWord: "Step",
+    uData: [
+      { t: 'Ihram', d: 'Enter the state of Ihram at the Miqat, wear garments, and make intention.' },
+      { t: 'Tawaf', d: 'Perform 7 circuits around the Kaaba.' },
+      { t: 'Sa\'i', d: 'Walk 7 times between Safa and Marwah.' },
+      { t: 'Halq / Taqsir', d: 'Shave or trim hair to exit Ihram.' }
+    ],
+    hData: [
+      { t: 'Mina (Tarwiyah)', d: 'Spend the 8th of Dhul Hijjah in Mina in prayer.' },
+      { t: 'Arafat', d: 'Stand on the plains of Arafat on the 9th. The climax of Hajj.' },
+      { t: 'Muzdalifah', d: 'Spend the night under stars and collect pebbles.' },
+      { t: 'Jamarat', d: 'Stone the pillars in Mina.' },
+      { t: 'Tawaf Ziyarah', d: 'Perform the obligatory Tawaf and Sa\'i.' }
+    ],
+
+    // Hifdh
+    hfTitle: "Hifdh Quran Tester",
+    hfDesc: "Memorize and test your recitation",
+    hfShow: "👁️ Show Page",
+    hfHide: "🙈 Hide Page",
+    hfMode: "Hifdh Mode Active - Recite from memory",
+    hfPage: "Page",
+    hf15: "15-Line",
+    hf16: "16-Line"
+  },
+  
+  ur: {
+    appTitle: "مرکزِ علومِ اسلامیہ",
+    appDesc: "شروع کرنے کے لیے ایک ٹول منتخب کریں",
+    backMenu: "مینو پر واپس جائیں →",
+    btnLang: "English",
+    menuInh: "وراثت",
+    menuZak: "زکوٰۃ",
+    menuUmr: "عمرہ ٹریکر",
+    menuHaj: "حج ٹریکر",
+    menuHif: "حفظ قرآن",
+    menuEnum: "ای-نمبر چیکر",
+    comingSoon: "جلد آ رہا ہے",
+    underConst: "یہ ٹول ابھی بن رہا ہے۔ جلد واپس آئیں!",
+    btnBack: "پیچھے →",
+    btnNext: "← آگے",
+    btnStartOver: "↺ دوبارہ شروع کریں",
+    btnCalc: "← حساب لگائیں",
+    btnYes: "ہاں",
+    btnNo: "نہیں",
+    male: "مرد",
+    female: "عورت",
+    resetProg: "ری سیٹ کریں",
+    
+    // Zakat
+    zTitle: "زکوٰۃ کیلکولیٹر",
+    zDesc: "اپنی 2.5٪ فرض زکوٰۃ کا حساب لگائیں",
+    zSteps: ['اثاثے', 'قرضے', 'نتائج'],
+    zS1T: "قابلِ زکوٰۃ اثاثے",
+    zS1D: "اپنے ان اثاثوں کی مالیت درج کریں جو ایک مکمل قمری سال سے آپ کی ملکیت میں ہیں۔",
+    zS1Cash: "نقد رقم اور بینک بیلنس",
+    zS1Gold: "ملکیتی سونے کی مالیت",
+    zS1Silver: "ملکیتی چاندی کی مالیت",
+    zS1Biz: "کاروباری سامان اور مالِ تجارت",
+    zS1Note: "اگر آپ کے پاس کوئی اثاثہ نہیں ہے تو اسے خالی چھوڑ دیں۔",
+    zS2T: "منہا کیے جانے والے قرضے",
+    zS2D: "کوئی بھی فوری یا قلیل مدتی قرض درج کریں جس کی ادائیگی لازمی ہو۔",
+    zS2Debt: "قلیل مدتی قرضے اور فوری بل",
+    zS2Note: "طویل مدتی قرضے (جیسے ہوم لون) عام طور پر مکمل منہا نہیں ہوتے؛ کسی عالم سے رجوع کریں۔",
+    zS3T: "زکوٰۃ کے نتائج",
+    zS3Tot: "کل اثاثے",
+    zS3Minus: "منہا قرضے",
+    zS3Net: "خالص قابلِ زکوٰۃ مال",
+    zS3NisabReach: "<strong>نصاب مکمل ہے۔</strong> آپ کی خالص دولت تقریباً 5000 ڈالر کی حد سے زیادہ ہے۔",
+    zS3Due: "کل واجب الادا زکوٰۃ (2.5٪)",
+    zS3Below: "<strong>نصاب سے کم۔</strong> آپ کی دولت حد سے کم ہے۔ اس مال پر زکوٰۃ فرض نہیں ہے۔",
+    zS3NotDue: "کل واجب الادا زکوٰۃ",
+    
+    // Inheritance
+    iTitle: "وراثت کیلکولیٹر",
+    iDesc: "سورۃ النساء کی روشنی میں",
+    iSteps: ['مرحوم', 'شریک حیات', 'بچے', 'والدین', 'بہن بھائی', 'نتائج'],
+    iS1T: "مرحوم",
+    iS1D: "وفات پانے والے شخص کی جنس منتخب کریں",
+    iS2T: "بقیدِ حیات شریک حیات",
+    iS2DWife: "مرحوم کی کتنی بیویاں حیات ہیں؟",
+    iS2DHus: "کیا شوہر بقیدِ حیات ہے؟",
+    iS2NumWives: "بیویوں کی تعداد",
+    iS2HusAlive: "شوہر بقیدِ حیات ہے",
+    iS2Note: "شوہر کو ½ (بچے نہ ہونے پر) یا ¼ (بچے ہونے پر) ملتا ہے۔ بیویاں کل کا ¼ یا ⅛ آپس میں بانٹتی ہیں۔",
+    iS3T: "بچے",
+    iS3D: "مرحوم نے کتنے بیٹے اور بیٹیاں چھوڑے ہیں؟",
+    iS3Sons: "بیٹے",
+    iS3Daus: "بیٹیاں",
+    iS3Note: "بیٹے اور بیٹیاں 2:1 کے تناسب سے بقیہ حصہ بانٹتے ہیں۔",
+    iS4T: "والدین",
+    iS4D: "مرحوم کے کون سے والدین حیات ہیں؟",
+    iS4Dad: "والد زندہ ہیں",
+    iS4Mom: "والدہ زندہ ہیں",
+    iS4Note: "مرحوم کی اولاد ہونے کی صورت میں ہر والدین کو ⅙ ملتا ہے۔",
+    iS5T: "بہن بھائی",
+    iS5D: "بہن بھائی صرف اس صورت میں وارث ہوتے ہیں جب کوئی اولاد اور والد زندہ نہ ہو۔",
+    iS5FBro: "سگے بھائی",
+    iS5FSis: "سگی بہنیں",
+    iS5USib: "اخیافی (ماں شریک) بہن بھائی",
+    iS5Note: "بھائی اور بہنیں 2:1 کے تناسب سے بانٹتے ہیں۔ ماں شریک بہن بھائی برابر حصہ لیتے ہیں۔",
+    iS6NoHeirs: "کوئی مستحق وارث نہیں ملا۔ براہ کرم اپنے انتخاب کا جائزہ لیں۔",
+    iS6Assigned: "کل تقسیم شدہ",
+    
+    // Trackers
+    uTitle: "عمرہ ٹریکر",
+    uDesc: "عمرہ مکمل کرنے کے لیے ان اقدامات پر عمل کریں",
+    hTitle: "حج ٹریکر",
+    hDesc: "حج کے بنیادی مناسک پر عمل کریں",
+    tProg: "پیش رفت",
+    tSteps: "مراحل",
+    tImgPlace: "[ تصویر کی جگہ: ",
+    tStepWord: "مرحلہ",
+    uData: [
+      { t: 'احرام', d: 'میقات پر احرام کی حالت میں داخل ہوں، لباس پہنیں، اور نیت کریں۔' },
+      { t: 'طواف', d: 'خانہ کعبہ کے گرد 7 چکر لگائیں۔' },
+      { t: 'سعی', d: 'صفا اور مروہ کے درمیان 7 بار چلیں۔' },
+      { t: 'حلق / قصر', d: 'احرام سے باہر آنے کے لیے بال منڈوائیں یا کٹوائیں۔' }
+    ],
+    hData: [
+      { t: 'منیٰ (یوم الترویہ)', d: '8 ذوالحجہ کا دن منیٰ میں عبادت میں گزاریں۔' },
+      { t: 'عرفات', d: '9 ذوالحجہ کو میدانِ عرفات میں قیام کریں۔ یہ حج کا سب سے اہم رکن ہے۔' },
+      { t: 'مزدلفہ', d: 'رات کھلے آسمان تلے گزاریں اور کنکریاں جمع کریں۔' },
+      { t: 'جمرات', d: 'منیٰ میں شیطان کو کنکریاں ماریں۔' },
+      { t: 'طوافِ زیارت', d: 'فرض طواف اور سعی مکمل کریں۔' }
+    ],
+
+    // Hifdh
+    hfTitle: "حفظِ قرآن ٹیسٹر",
+    hfDesc: "اپنی یادداشت اور تلاوت کی جانچ کریں",
+    hfShow: "👁️ صفحہ دکھائیں",
+    hfHide: "🙈 صفحہ چھپائیں",
+    hfMode: "حفظ موڈ فعال ہے - زبانی تلاوت کریں",
+    hfPage: "صفحہ",
+    hf15: "15-لائن",
+    hf16: "16-لائن"
+  }
+};
+
+let LANG = localStorage.getItem('appLang') || 'en';
+function t(key) { return DICT[LANG][key] || key; }
+
+function toggleLang() {
+  LANG = LANG === 'en' ? 'ur' : 'en';
+  localStorage.setItem('appLang', LANG);
+  renderApp();
+}
+
 // ==== INHERITANCE MATH ENGINE ====
 const gcd=(a,b)=>b===0?a:gcd(b,a%b);
 const F=(n,d)=>{if(n<=0||d<=0)return{n:0,d:1};const g=gcd(n,d);return{n:n/g,d:d/g}};
@@ -151,67 +403,35 @@ const fstr=f=>{if(f.n===0)return'0';if(f.d===1)return`${f.n}`;return`${f.n}/${f.
 // ==== APP STATE ====
 let currentTool = 'menu';
 let step = 0;
-
-// Inheritance State
-const INH_STEPS=['Deceased','Spouse','Children','Parents','Siblings','Results'];
 const PALETTE=['#1D9E75','#BA7517','#185FA5','#993556','#A32D2D','#534AB7','#3B6D11','#854F0B'];
 let S_INH={gender:null,hasHusband:false,numWives:0,sons:0,daughters:0,fatherAlive:false,motherAlive:false,fullBrothers:0,fullSisters:0,uterineSiblings:0};
-
-// Zakat State
-const ZAK_STEPS=['Assets','Debts','Results'];
-const NISAB_USD = 5000;
 let S_ZAK={cash:'', gold:'', silver:'', business:'', debts:''};
-
-// Tracker States
-let S_UMRAH = JSON.parse(localStorage.getItem('umrahState')) || { u1:false, u2:false, u3:false, u4:false };
-let S_HAJJ = JSON.parse(localStorage.getItem('hajjState')) || { h1:false, h2:false, h3:false, h4:false, h5:false };
-const UMRAH_DATA = [
-  { id: 'u1', title: 'Ihram', desc: 'Enter the state of Ihram at the Miqat, wear garments, and make intention.' },
-  { id: 'u2', title: 'Tawaf', desc: 'Perform 7 circuits around the Kaaba.' },
-  { id: 'u3', title: 'Sa\'i', desc: 'Walk 7 times between Safa and Marwah.' },
-  { id: 'u4', title: 'Halq / Taqsir', desc: 'Shave or trim hair to exit Ihram.' }
-];
-const HAJJ_DATA = [
-  { id: 'h1', title: 'Mina (Tarwiyah)', desc: 'Spend the 8th of Dhul Hijjah in Mina in prayer.' },
-  { id: 'h2', title: 'Arafat', desc: 'Stand on the plains of Arafat on the 9th. The climax of Hajj.' },
-  { id: 'h3', title: 'Muzdalifah', desc: 'Spend the night under stars and collect pebbles.' },
-  { id: 'h4', title: 'Jamarat', desc: 'Stone the pillars in Mina.' },
-  { id: 'h5', title: 'Tawaf Ziyarah', desc: 'Perform the obligatory Tawaf and Sa\'i.' }
-];
-
-// Hifdh State
+const NISAB_USD = 5000;
+let S_UMRAH = JSON.parse(localStorage.getItem('umrahState')) || { u0:false, u1:false, u2:false, u3:false };
+let S_HAJJ = JSON.parse(localStorage.getItem('hajjState')) || { h0:false, h1:false, h2:false, h3:false, h4:false };
 let S_HIFDH = { style: '15line', page: 1, hidden: false, maxPages: 604 };
 
 // ==== NAVIGATION LOGIC ====
-function openMenu() {
-  currentTool = 'menu';
-  step = 0;
-  renderApp();
-}
-
-function startTool(toolName) {
-  currentTool = toolName;
-  step = 0;
-  renderApp();
-}
+function openMenu() { currentTool = 'menu'; step = 0; renderApp(); }
+function startTool(toolName) { currentTool = toolName; step = 0; renderApp(); }
 
 function renderApp() {
+  document.body.className = LANG === 'ur' ? 'rtl' : '';
   const card = document.getElementById('card');
   const prog = document.getElementById('prog');
   const nav = document.getElementById('nav');
-  const title = document.getElementById('app-title');
-  const desc = document.getElementById('app-desc');
-  const backBtn = document.getElementById('btn-back');
+  
+  document.getElementById('btn-lang').innerText = t('btnLang');
+  document.getElementById('btn-back').innerText = t('backMenu');
 
-  // Reset Card styles
   card.style.border = '0.5px solid var(--color-border-tertiary)';
   card.style.background = 'var(--color-background-primary)';
   card.style.padding = '1.25rem';
 
   if (currentTool === 'menu') {
-    title.textContent = 'Islamic Knowledge Hub';
-    desc.textContent = 'Select a tool to begin';
-    backBtn.style.display = 'none';
+    document.getElementById('app-title').textContent = t('appTitle');
+    document.getElementById('app-desc').textContent = t('appDesc');
+    document.getElementById('btn-back').style.display = 'none';
     prog.style.display = 'none';
     nav.style.display = 'none';
     card.style.border = 'none';
@@ -220,101 +440,67 @@ function renderApp() {
     
     card.innerHTML = `
       <div class="menu-grid">
-        <div class="menu-card" onclick="startTool('inheritance')">
-          <div class="menu-icon">⚖️</div>
-          <div class="menu-title">Inheritance</div>
-        </div>
-        <div class="menu-card" onclick="startTool('zakat')">
-          <div class="menu-icon">💰</div>
-          <div class="menu-title">Zakat</div>
-        </div>
-        <div class="menu-card" onclick="startTool('umrah')">
-          <div class="menu-icon">🕋</div>
-          <div class="menu-title">Umrah Tracker</div>
-        </div>
-        <div class="menu-card" onclick="startTool('hajj')">
-          <div class="menu-icon">⛺</div>
-          <div class="menu-title">Hajj Tracker</div>
-        </div>
-        <div class="menu-card" onclick="startTool('hifdh')">
-          <div class="menu-icon">📖</div>
-          <div class="menu-title">Hifdh Quran</div>
-        </div>
-        <div class="menu-card" onclick="startTool('enumber')">
-          <div class="menu-icon">🔍</div>
-          <div class="menu-title">E-Number Checker</div>
-        </div>
-      </div>
-    `;
+        <div class="menu-card" onclick="startTool('inheritance')"><div class="menu-icon">⚖️</div><div class="menu-title">${t('menuInh')}</div></div>
+        <div class="menu-card" onclick="startTool('zakat')"><div class="menu-icon">💰</div><div class="menu-title">${t('menuZak')}</div></div>
+        <div class="menu-card" onclick="startTool('umrah')"><div class="menu-icon">🕋</div><div class="menu-title">${t('menuUmr')}</div></div>
+        <div class="menu-card" onclick="startTool('hajj')"><div class="menu-icon">⛺</div><div class="menu-title">${t('menuHaj')}</div></div>
+        <div class="menu-card" onclick="startTool('hifdh')"><div class="menu-icon">📖</div><div class="menu-title">${t('menuHif')}</div></div>
+        <div class="menu-card" onclick="startTool('enumber')"><div class="menu-icon">🔍</div><div class="menu-title">${t('menuEnum')}</div></div>
+      </div>`;
     return;
   }
 
-  // If a tool is open:
-  backBtn.style.display = 'block';
+  document.getElementById('btn-back').style.display = 'block';
 
   if (currentTool === 'inheritance') {
-    title.textContent = 'Inheritance Calculator';
-    desc.textContent = 'Based on Surah An-Nisa';
-    prog.style.display = 'flex';
-    nav.style.display = 'flex';
-    renderProg(INH_STEPS);
-    renderInheritance();
-    renderNav(INH_STEPS.length);
+    document.getElementById('app-title').textContent = t('iTitle');
+    document.getElementById('app-desc').textContent = t('iDesc');
+    prog.style.display = 'flex'; nav.style.display = 'flex';
+    renderProg(t('iSteps')); renderInheritance(); renderNav(t('iSteps').length);
   } else if (currentTool === 'zakat') {
-    title.textContent = 'Zakat Calculator';
-    desc.textContent = 'Calculate your 2.5% obligatory charity';
-    prog.style.display = 'flex';
-    nav.style.display = 'flex';
-    renderProg(ZAK_STEPS);
-    renderZakat();
-    renderNav(ZAK_STEPS.length);
+    document.getElementById('app-title').textContent = t('zTitle');
+    document.getElementById('app-desc').textContent = t('zDesc');
+    prog.style.display = 'flex'; nav.style.display = 'flex';
+    renderProg(t('zSteps')); renderZakat(); renderNav(t('zSteps').length);
   } else if (currentTool === 'umrah') {
-    title.textContent = 'Umrah Visual Tracker';
-    desc.textContent = 'Follow the steps to complete your Umrah';
-    prog.style.display = 'none';
-    nav.style.display = 'none';
-    card.style.border = 'none';
-    card.style.background = 'transparent';
-    card.style.padding = '0';
+    document.getElementById('app-title').textContent = t('uTitle');
+    document.getElementById('app-desc').textContent = t('uDesc');
+    prog.style.display = 'none'; nav.style.display = 'none';
+    card.style.border = 'none'; card.style.background = 'transparent'; card.style.padding = '0';
     renderTracker('umrah');
   } else if (currentTool === 'hajj') {
-    title.textContent = 'Hajj Visual Tracker';
-    desc.textContent = 'Follow the primary rituals of Hajj';
-    prog.style.display = 'none';
-    nav.style.display = 'none';
-    card.style.border = 'none';
-    card.style.background = 'transparent';
-    card.style.padding = '0';
+    document.getElementById('app-title').textContent = t('hTitle');
+    document.getElementById('app-desc').textContent = t('hDesc');
+    prog.style.display = 'none'; nav.style.display = 'none';
+    card.style.border = 'none'; card.style.background = 'transparent'; card.style.padding = '0';
     renderTracker('hajj');
   } else if (currentTool === 'hifdh') {
-    title.textContent = 'Hifdh Quran Tester';
-    desc.textContent = 'Memorize and test your recitation';
-    prog.style.display = 'none';
-    nav.style.display = 'none';
+    document.getElementById('app-title').textContent = t('hfTitle');
+    document.getElementById('app-desc').textContent = t('hfDesc');
+    prog.style.display = 'none'; nav.style.display = 'none';
     renderHifdh();
   } else {
-    title.textContent = currentTool.charAt(0).toUpperCase() + currentTool.slice(1);
-    desc.textContent = 'Tool currently under construction';
-    prog.style.display = 'none';
-    nav.style.display = 'none';
-    card.innerHTML = `<div class="placeholder-view"><div style="font-size:40px;margin-bottom:10px;">🚧</div><h3>Coming Soon</h3></div>`;
+    document.getElementById('app-title').textContent = t('comingSoon');
+    document.getElementById('app-desc').textContent = t('underConst');
+    prog.style.display = 'none'; nav.style.display = 'none';
+    card.innerHTML = `<div class="placeholder-view"><div style="font-size:40px;margin-bottom:10px;">🚧</div><h3>${t('comingSoon')}</h3></div>`;
   }
 }
 
-// ==== UI RENDER HELPERS ====
+// ==== UI UTILS ====
 function renderProg(arr) {
   document.getElementById('prog').innerHTML=arr.map((s,i)=>`<div class="prog-item"><div class="prog-bar ${i<=step?'active':''}"></div><span class="prog-label ${i===step?'active':''}">${s}</span></div>`).join('');
 }
 function renderNav(maxSteps) {
   const nav=document.getElementById('nav');
   const bDisabled = step===0;
-  let nTxt = 'Next →';
-  if(step === maxSteps-1) nTxt = '↺ Start over';
-  else if(step === maxSteps-2) nTxt = 'Calculate →';
+  let nTxt = t('btnNext');
+  if(step === maxSteps-1) nTxt = t('btnStartOver');
+  else if(step === maxSteps-2) nTxt = t('btnCalc');
   let nDisabled = (currentTool === 'inheritance' && step === 0 && !S_INH.gender);
 
   nav.innerHTML=`
-    <button class="nav-btn" onclick="if(step>0){step--; renderApp();}" ${bDisabled?'disabled':''}>← Back</button>
+    <button class="nav-btn" onclick="if(step>0){step--; renderApp();}" ${bDisabled?'disabled':''}>${t('btnBack')}</button>
     <button class="nav-btn prim" onclick="if(step<${maxSteps}-1){step++; renderApp();}else{resetTool();}" ${nDisabled?'disabled':''}>${nTxt}</button>
   `;
 }
@@ -330,186 +516,57 @@ function tog(k,v){S_INH[k]=v; renderApp();}
 function updateZakat(k, val){S_ZAK[k]=val;}
 
 function Ctr(lbl,k,max=10){return`<div class="row"><label>${lbl}</label><div class="counter"><button class="ctr-btn" onclick="adj('${k}',-1)">−</button><span class="ctr-val">${S_INH[k]}</span><button class="ctr-btn" onclick="adj('${k}',1,${max})">+</button></div></div>`;}
-function Tog(lbl,k){return`<div class="row"><label>${lbl}</label><div class="toggle"><button class="tog-btn ${S_INH[k]?'on':''}" onclick="tog('${k}',true)">Yes</button><button class="tog-btn ${!S_INH[k]?'on':''}" onclick="tog('${k}',false)">No</button></div></div>`;}
-function Inp(lbl, k){return`<div class="row"><label>${lbl}</label><div class="input-wrapper"><span class="input-prefix">$</span><input type="number" class="val-input" placeholder="0" value="${S_ZAK[k]}" oninput="updateZakat('${k}',this.value)"></div></div>`;}
+function Tog(lbl,k){return`<div class="row"><label>${lbl}</label><div class="toggle"><button class="tog-btn ${S_INH[k]?'on':''}" onclick="tog('${k}',true)">${t('btnYes')}</button><button class="tog-btn ${!S_INH[k]?'on':''}" onclick="tog('${k}',false)">${t('btnNo')}</button></div></div>`;}
+function Inp(lbl, k){return`<div class="row"><label>${lbl}</label><div class="input-wrapper"><span class="input-prefix">${LANG==='en'?'$':'$'}</span><input type="number" class="val-input" placeholder="0" value="${S_ZAK[k]}" oninput="updateZakat('${k}',this.value)"></div></div>`;}
 
-// ==== TOOL: HIFDH QURAN ====
-function changeQPage(d) {
-  S_HIFDH.page = Math.max(1, Math.min(S_HIFDH.maxPages, S_HIFDH.page + d));
-  renderApp();
-}
-function setQStyle(s) {
-  S_HIFDH.style = s;
-  renderApp();
-}
-function toggleQHidden() {
-  S_HIFDH.hidden = !S_HIFDH.hidden;
-  renderApp();
-}
-
-// NOTE: Replace this function logic with real image URL paths for the Quran pages later.
-function getQuranPageUrl(style, page) {
-  const styleText = style === '15line' ? '15-Line (Saudi)' : '16-Line (Indo-Pak)';
-  // using a dummy placeholder service for demonstration:
-  return `https://via.placeholder.com/450x650/E1F5EE/0F6E56?text=${encodeURIComponent(styleText + '\n\nPage ' + page)}`;
-}
-
-function renderHifdh() {
-  const c = document.getElementById('card');
-  const { style, page, hidden, maxPages } = S_HIFDH;
-  
-  c.innerHTML = `
-    <div style="display:flex; justify-content:space-between; margin-bottom:1rem; align-items:center;">
-      <div class="segmented-control">
-        <button class="segmented-btn ${style==='15line'?'active':''}" onclick="setQStyle('15line')">15-Line</button>
-        <button class="segmented-btn ${style==='16line'?'active':''}" onclick="setQStyle('16line')">16-Line</button>
-      </div>
-      <button class="nav-btn ${hidden?'prim':''}" style="padding:6px 12px;" onclick="toggleQHidden()">
-        ${hidden ? '👁️ Show Page' : '🙈 Hide Page'}
-      </button>
-    </div>
-    
-    <div class="hifdh-viewer">
-      <img src="${getQuranPageUrl(style, page)}" class="hifdh-img ${hidden ? 'hidden-mode' : ''}" alt="Quran Page ${page}">
-      ${hidden ? '<div class="hifdh-overlay">Hifdh Mode Active - Recite from memory</div>' : ''}
-    </div>
-    
-    <div class="row" style="border:none; padding-bottom:0;">
-      <button class="nav-btn" onclick="changeQPage(-1)" ${page===1?'disabled':''}>← Prev</button>
-      <span style="font-weight:500; font-size:15px; color:var(--color-text-secondary);">Page ${page} / ${maxPages}</span>
-      <button class="nav-btn" onclick="changeQPage(1)" ${page===maxPages?'disabled':''}>Next →</button>
-    </div>
-  `;
-}
-
-// ==== TOOL: VISUAL TRACKERS (Umrah & Hajj) ====
-function toggleTracker(type, id) {
-  if (type === 'umrah') {
-    S_UMRAH[id] = !S_UMRAH[id];
-    localStorage.setItem('umrahState', JSON.stringify(S_UMRAH));
-  } else {
-    S_HAJJ[id] = !S_HAJJ[id];
-    localStorage.setItem('hajjState', JSON.stringify(S_HAJJ));
-  }
-  renderApp();
-}
-function clearTracker(type) {
-  if (type === 'umrah') {
-    S_UMRAH = { u1:false, u2:false, u3:false, u4:false };
-    localStorage.setItem('umrahState', JSON.stringify(S_UMRAH));
-  } else {
-    S_HAJJ = { h1:false, h2:false, h3:false, h4:false, h5:false };
-    localStorage.setItem('hajjState', JSON.stringify(S_HAJJ));
-  }
-  renderApp();
-}
-function renderTracker(type) {
-  const c = document.getElementById('card');
-  const data = type === 'umrah' ? UMRAH_DATA : HAJJ_DATA;
-  const state = type === 'umrah' ? S_UMRAH : S_HAJJ;
-  
-  const total = data.length;
-  const completed = data.filter(item => state[item.id]).length;
-  const percent = Math.round((completed / total) * 100);
-
-  let html = `
-    <div class="status-bar">
-      <span>Progress: ${completed} / ${total} steps</span>
-      <span style="color:#1D9E75;">${percent}%</span>
-    </div>
-    <div class="prog" style="margin-bottom:1.5rem;">
-      <div style="width:100%; background:var(--color-background-tertiary); height:6px; border-radius:4px; overflow:hidden;">
-        <div style="width:${percent}%; background:#1D9E75; height:100%; transition:width 0.3s;"></div>
-      </div>
-    </div>
-    <div class="tracker-list">
-  `;
-  data.forEach((item, index) => {
-    const isDone = state[item.id];
-    html += `
-      <div class="tracker-card ${isDone ? 'completed' : ''}" onclick="toggleTracker('${type}', '${item.id}')">
-        <div class="tracker-img-wrap">
-          <span>[ Image Placeholder: ${item.title} ]</span>
-        </div>
-        <div class="tracker-content">
-          <div class="tracker-text">
-            <div class="tracker-title">Step ${index + 1}: ${item.title}</div>
-            <div class="tracker-desc">${item.desc}</div>
-          </div>
-          <div class="tracker-check">${isDone ? '✓' : ''}</div>
-        </div>
-      </div>
-    `;
-  });
-  html += `</div><div style="text-align:center; margin-top:2rem;"><button class="nav-btn" onclick="clearTracker('${type}')">Reset Progress</button></div>`;
-  c.innerHTML = html;
-}
-
-// ==== TOOL: ZAKAT CALCULATOR ====
+// ==== TOOLS ====
 function renderZakat() {
   const c = document.getElementById('card');
   if(step===0) {
     c.innerHTML = `
-      <p class="step-title">Zakatable Assets</p>
-      <p class="step-desc">Enter the value of your liquid and trading assets held for a full lunar year.</p>
-      ${Inp('Cash in hand and bank accounts', 'cash')}
-      ${Inp('Value of Gold owned', 'gold')}
-      ${Inp('Value of Silver owned', 'silver')}
-      ${Inp('Business inventory & trade goods', 'business')}
-      <div class="verse-note">Leave empty if you do not own a certain asset type.</div>
-    `;
+      <p class="step-title">${t('zS1T')}</p><p class="step-desc">${t('zS1D')}</p>
+      ${Inp(t('zS1Cash'), 'cash')}${Inp(t('zS1Gold'), 'gold')}${Inp(t('zS1Silver'), 'silver')}${Inp(t('zS1Biz'), 'business')}
+      <div class="verse-note">${t('zS1Note')}</div>`;
   } else if(step===1) {
     c.innerHTML = `
-      <p class="step-title">Deductible Debts</p>
-      <p class="step-desc">Enter any immediate, short-term debts that must be paid.</p>
-      ${Inp('Short-term debts & immediate bills', 'debts')}
-      <div class="verse-note">Long-term debts (e.g., student loans, mortgages) are generally not fully deducted; consult a scholar for specific fiqh rulings.</div>
-    `;
+      <p class="step-title">${t('zS2T')}</p><p class="step-desc">${t('zS2D')}</p>
+      ${Inp(t('zS2Debt'), 'debts')}
+      <div class="verse-note">${t('zS2Note')}</div>`;
   } else if(step===2) {
     const cash = Number(S_ZAK.cash) || 0, gold = Number(S_ZAK.gold) || 0, silver = Number(S_ZAK.silver) || 0, biz = Number(S_ZAK.business) || 0, debts = Number(S_ZAK.debts) || 0;
-    const totalAssets = cash + gold + silver + biz;
-    const netWorth = totalAssets - debts;
+    const netWorth = (cash + gold + silver + biz) - debts;
     const isNisab = netWorth >= NISAB_USD;
-    const zakatDue = isNisab ? netWorth * 0.025 : 0;
-
     let html = `
-      <p class="step-title">Zakat Results</p>
+      <p class="step-title">${t('zS3T')}</p>
       <div style="margin:1rem 0;">
-        <div class="row" style="padding:6px 0;"><label>Total Assets</label><span>$${totalAssets.toFixed(2)}</span></div>
-        <div class="row" style="padding:6px 0;"><label>Minus Debts</label><span>-$${debts.toFixed(2)}</span></div>
-        <div class="row" style="padding:6px 0; border-top:1px solid #000; font-weight:600;"><label>Net Zakatable Wealth</label><span>$${netWorth.toFixed(2)}</span></div>
-      </div>
-    `;
+        <div class="row" style="padding:6px 0;"><label>${t('zS3Tot')}</label><span>$${(cash+gold+silver+biz).toFixed(2)}</span></div>
+        <div class="row" style="padding:6px 0;"><label>${t('zS3Minus')}</label><span>-$${debts.toFixed(2)}</span></div>
+        <div class="row" style="padding:6px 0; border-top:1px solid #000; font-weight:600;"><label>${t('zS3Net')}</label><span>$${netWorth.toFixed(2)}</span></div>
+      </div>`;
     if (isNisab) {
-      html += `<div class="alert success"><strong>Nisab reached.</strong> Your net wealth is above the approx. $${NISAB_USD} threshold.</div><div class="total-row" style="margin-top:1rem;"><span class="total-label">Total Zakat Due (2.5%)</span><span class="total-val">$${zakatDue.toFixed(2)}</span></div>`;
+      html += `<div class="alert success">${t('zS3NisabReach')}</div><div class="total-row" style="margin-top:1rem;"><span class="total-label">${t('zS3Due')}</span><span class="total-val">$${(netWorth * 0.025).toFixed(2)}</span></div>`;
     } else {
-      html += `<div class="alert"><strong>Below Nisab.</strong> Your net wealth is below the approx. $${NISAB_USD} threshold. Zakat is not obligatory on this wealth.</div><div class="total-row" style="margin-top:1rem; opacity:0.6; background:var(--color-background-tertiary); border-color:var(--color-border-secondary);"><span class="total-label" style="color:var(--color-text-primary);">Total Zakat Due</span><span class="total-val" style="color:var(--color-text-primary);">$0.00</span></div>`;
+      html += `<div class="alert">${t('zS3Below')}</div><div class="total-row" style="margin-top:1rem; opacity:0.6;"><span class="total-label">${t('zS3NotDue')}</span><span class="total-val">$0.00</span></div>`;
     }
     c.innerHTML = html;
   }
 }
 
-// ==== TOOL: INHERITANCE CALCULATOR ====
 function renderInheritance() {
   const c = document.getElementById('card');
   const {gender,hasHusband,numWives,sons,daughters,fatherAlive,motherAlive,fullBrothers,fullSisters,uterineSiblings} = S_INH;
-  
-  if(step===0) c.innerHTML=`<p class="step-title">The deceased</p><p class="step-desc">Select the gender of the person who has passed away</p><div class="choices"><button class="choice-btn ${gender==='male'?'sel':''}" onclick="S_INH.gender='male';renderApp()">Male</button><button class="choice-btn ${gender==='female'?'sel':''}" onclick="S_INH.gender='female';renderApp()">Female</button></div>`;
-  else if(step===1){let html=`<p class="step-title">Surviving spouse</p>`;if(gender==='male'){html+=`<p class="step-desc">How many wives does the deceased leave?</p>${Ctr('Number of wives','numWives',4)}`;}else html+=`<p class="step-desc">Is there a surviving husband?</p>${Tog('Husband is surviving','hasHusband')}`;html+=`<div class="verse-note"><span class="verse-ref">4:12</span> — Husband receives ½ (no children) or ¼ (has children). Wife/wives share ¼ or ⅛ total.</div>`;c.innerHTML=html;}
-  else if(step===2) c.innerHTML=`<p class="step-title">Children</p><p class="step-desc">How many sons and daughters did the deceased leave?</p>${Ctr('Sons','sons')}${Ctr('Daughters','daughters')}<div class="verse-note"><span class="verse-ref">4:11</span> — Sons and daughters share the residue 2:1.</div>`;
-  else if(step===3) c.innerHTML=`<p class="step-title">Parents</p><p class="step-desc">Which parents of the deceased are still living?</p>${Tog('Father is alive','fatherAlive')}${Tog('Mother is alive','motherAlive')}<div class="verse-note"><span class="verse-ref">4:11</span> — Each parent receives ⅙ when the deceased leaves children.</div>`;
-  else if(step===4) c.innerHTML=`<p class="step-title">Siblings</p><p class="step-desc">Siblings inherit only when there are <em>no children</em> and <em>no surviving father</em>.</p>${Ctr('Full brothers','fullBrothers')}${Ctr('Full sisters','fullSisters')}${Ctr('Uterine (maternal half) siblings','uterineSiblings')}<div class="verse-note"><span class="verse-ref">4:176</span> — One sister gets ½; two or more share ⅔. Brothers with sisters: 2:1 ratio.</div>`;
+  if(step===0) c.innerHTML=`<p class="step-title">${t('iS1T')}</p><p class="step-desc">${t('iS1D')}</p><div class="choices"><button class="choice-btn ${gender==='male'?'sel':''}" onclick="S_INH.gender='male';renderApp()">${t('male')}</button><button class="choice-btn ${gender==='female'?'sel':''}" onclick="S_INH.gender='female';renderApp()">${t('female')}</button></div>`;
+  else if(step===1){let html=`<p class="step-title">${t('iS2T')}</p>`;if(gender==='male')html+=`<p class="step-desc">${t('iS2DWife')}</p>${Ctr(t('iS2NumWives'),'numWives',4)}`;else html+=`<p class="step-desc">${t('iS2DHus')}</p>${Tog(t('iS2HusAlive'),'hasHusband')}`;html+=`<div class="verse-note">${t('iS2Note')}</div>`;c.innerHTML=html;}
+  else if(step===2) c.innerHTML=`<p class="step-title">${t('iS3T')}</p><p class="step-desc">${t('iS3D')}</p>${Ctr(t('iS3Sons'),'sons')}${Ctr(t('iS3Daus'),'daughters')}<div class="verse-note">${t('iS3Note')}</div>`;
+  else if(step===3) c.innerHTML=`<p class="step-title">${t('iS4T')}</p><p class="step-desc">${t('iS4D')}</p>${Tog(t('iS4Dad'),'fatherAlive')}${Tog(t('iS4Mom'),'motherAlive')}<div class="verse-note">${t('iS4Note')}</div>`;
+  else if(step===4) c.innerHTML=`<p class="step-title">${t('iS5T')}</p><p class="step-desc">${t('iS5D')}</p>${Ctr(t('iS5FBro'),'fullBrothers')}${Ctr(t('iS5FSis'),'fullSisters')}${Ctr(t('iS5USib'),'uterineSiblings')}<div class="verse-note">${t('iS5Note')}</div>`;
   else if(step===5){
     const r=computeInh();
-    if(!r.heirs.length){c.innerHTML='<div class="no-heirs">No qualifying heirs identified. Please review your selections.</div>';return;}
-    const totalPct=(fval(r.total)*100).toFixed(1);
-    let bar=r.heirs.map(h=>`<div style="width:${Math.min(100,(fval(h.frac)/Math.max(fval(r.total),0.001))*100).toFixed(2)}%;background:${h.color}" title="${h.name}"></div>`).join('');
+    if(!r.heirs.length){c.innerHTML=`<div class="no-heirs">${t('iS6NoHeirs')}</div>`;return;}
+    let bar=r.heirs.map(h=>`<div style="width:${Math.min(100,(fval(h.frac)/Math.max(fval(r.total),0.001))*100).toFixed(2)}%;background:${h.color}"></div>`).join('');
     if(r.hasRemainder&&!r.isAul)bar+=`<div style="flex:1;background:var(--color-background-tertiary)"></div>`;
-    let rows=r.heirs.map(h=>`<div class="heir-row"><div class="heir-dot" style="background:${h.color}"></div><div class="heir-info"><div class="heir-name">${h.name}</div><div class="heir-basis">An-Nisa ${h.verse} · ${h.basis}</div></div><div class="heir-frac"><div class="heir-f">${fstr(h.frac)}</div><div class="heir-p">${fpct(h.frac)}</div></div></div>`).join('');
-    let alerts='';
-    if(r.isAul)alerts+=`<div class="alert"><strong>ʿAwl (overcrowding):</strong> fixed shares exceed the estate. Consult a qualified scholar.</div>`;
-    if(r.hasRemainder&&!r.isAul)alerts+=`<div class="alert"><strong>Remainder (radd):</strong> ${(100-parseFloat(totalPct)).toFixed(1)}% is unassigned. Consult a qualified scholar.</div>`;
-    c.innerHTML=`<div class="dist-bar">${bar}</div>${rows}<div class="total-row"><span class="total-label">Total assigned</span><span class="total-val">${fstr(r.total)} · ${totalPct}%</span></div>${alerts}`;}
+    let rows=r.heirs.map(h=>`<div class="heir-row"><div class="heir-dot" style="background:${h.color}"></div><div class="heir-info"><div class="heir-name">${h.name}</div><div class="heir-basis">${h.basis}</div></div><div class="heir-frac"><div class="heir-f">${fstr(h.frac)}</div><div class="heir-p">${fpct(h.frac)}</div></div></div>`).join('');
+    c.innerHTML=`<div class="dist-bar">${bar}</div>${rows}<div class="total-row"><span class="total-label">${t('iS6Assigned')}</span><span class="total-val">${fstr(r.total)} · ${(fval(r.total)*100).toFixed(1)}%</span></div>`;}
 }
 
 function computeInh(){
@@ -517,30 +574,88 @@ function computeInh(){
   const hasChild=sons>0||daughters>0,hasSons=sons>0,hasDaus=daughters>0;
   const sibTotal=fullBrothers+fullSisters+uterineSiblings;
   const heirs=[];let used={n:0,d:1};let ci=0;
-  function add(name,f,verse,basis){
-    if(fval(f)>0.00001){heirs.push({name,frac:f,verse,basis,color:PALETTE[ci++%PALETTE.length]});used=fadd(used,f);}
-  }
-  if(gender==='male'&&numWives>0){const tot=hasChild?{n:1,d:8}:{n:1,d:4};add(numWives===1?'Wife':`Each wife (×${numWives})`,F(tot.n,tot.d*numWives),'4:12',`${hasChild?'1/8':'1/4'} total`);}
-  if(gender==='female'&&hasHusband)add('Husband',hasChild?{n:1,d:4}:{n:1,d:2},'4:12',hasChild?'1/4 — has children':'1/2 — no children');
-  if(motherAlive)add('Mother',(hasChild||sibTotal>=2)?{n:1,d:6}:{n:1,d:3},'4:11',(hasChild||sibTotal>=2)?'1/6':'1/3');
-  if(fatherAlive&&hasChild)add('Father',{n:1,d:6},'4:11','1/6 fixed — has children');
-  if(hasDaus&&!hasSons){const tot=daughters===1?{n:1,d:2}:{n:2,d:3};add(daughters===1?'Daughter':`Each daughter (×${daughters})`,F(tot.n,tot.d*daughters),'4:11',daughters===1?'1/2':'2/3 shared');}
-  if(!hasChild&&uterineSiblings>0){const tot=uterineSiblings===1?{n:1,d:6}:{n:1,d:3};add(uterineSiblings===1?'Uterine sibling':`Each uterine sibling (×${uterineSiblings})`,F(tot.n,tot.d*uterineSiblings),'4:12',uterineSiblings===1?'1/6':'1/3 shared');}
-  if(!hasChild&&!fatherAlive&&fullBrothers===0&&fullSisters>0){const tot=fullSisters===1?{n:1,d:2}:{n:2,d:3};add(fullSisters===1?'Full sister':`Each full sister (×${fullSisters})`,F(tot.n,tot.d*fullSisters),'4:176',fullSisters===1?'1/2':'2/3 shared');}
+  function add(name,f,basis){if(fval(f)>0.00001){heirs.push({name,frac:f,basis,color:PALETTE[ci++%PALETTE.length]});used=fadd(used,f);}}
+  if(gender==='male'&&numWives>0)add('Wife',F(hasChild?1:2,8*numWives),'4:12');
+  if(gender==='female'&&hasHusband)add('Husband',hasChild?{n:1,d:4}:{n:1,d:2},'4:12');
+  if(motherAlive)add('Mother',(hasChild||sibTotal>=2)?{n:1,d:6}:{n:1,d:3},'4:11');
+  if(fatherAlive&&hasChild)add('Father',{n:1,d:6},'4:11');
+  if(hasDaus&&!hasSons)add('Daughter',F(daughters===1?1:2,daughters===1?2:3),'4:11');
+  if(!hasChild&&uterineSiblings>0)add('Uterine Sibling',F(uterineSiblings===1?1:2,uterineSiblings===1?6:3),'4:12');
+  if(!hasChild&&!fatherAlive&&fullBrothers===0&&fullSisters>0)add('Full Sister',F(fullSisters===1?1:2,fullSisters===1?2:3),'4:176');
   const res=fsub({n:1,d:1},used);
   if(fval(res)>0.00001){
-    if(hasSons){
-      if(hasDaus){const u=sons*2+daughters;add(sons===1?'Son':`Each son (×${sons})`,F(res.n*2,res.d*u),'4:11','2 parts residue');add(daughters===1?'Daughter':`Each daughter (×${daughters})`,F(res.n,res.d*u),'4:11','1 part residue');}
-      else add(sons===1?'Son':`Each son (×${sons})`,F(res.n,res.d*sons),'4:11','Residuary heir');}
-    else if(!hasChild&&fatherAlive){const fi=heirs.findIndex(h=>h.name==='Father');if(fi>=0){heirs[fi]={...heirs[fi],frac:fadd(heirs[fi].frac,res),basis:'1/6 fixed + residue'};}else add('Father',res,'4:11','Residuary — no children');}
-    else if(!hasChild&&!fatherAlive){
-      if(fullBrothers>0&&fullSisters>0){const u=fullBrothers*2+fullSisters;add(fullBrothers===1?'Full brother':`Each full brother (×${fullBrothers})`,F(res.n*2,res.d*u),'4:176','2 parts');add(fullSisters===1?'Full sister':`Each full sister (×${fullSisters})`,F(res.n,res.d*u),'4:176','1 part');}
-      else if(fullBrothers>0)add(fullBrothers===1?'Full brother':`Each full brother (×${fullBrothers})`,F(res.n,res.d*fullBrothers),'4:176','Residuary');}}
+    if(hasSons){if(hasDaus){add('Son',F(res.n*2,res.d*(sons*2+daughters)),'Residue');add('Daughter',F(res.n,res.d*(sons*2+daughters)),'Residue');}else add('Son',F(res.n,res.d*sons),'Residue');}
+    else if(!hasChild&&fatherAlive)add('Father',res,'Residue');
+    else if(!hasChild&&!fatherAlive){if(fullBrothers>0&&fullSisters>0){add('Full Brother',F(res.n*2,res.d*(fullBrothers*2+fullSisters)),'Residue');add('Full Sister',F(res.n,res.d*(fullBrothers*2+fullSisters)),'Residue');}else if(fullBrothers>0)add('Full Brother',F(res.n,res.d*fullBrothers),'Residue');}}
   const total=heirs.reduce((a,h)=>fadd(a,h.frac),{n:0,d:1});
   return{heirs,total,isAul:fval(total)>1.001,hasRemainder:fval(total)<0.999&&heirs.length>0};
 }
 
-// Init App
+function renderTracker(type) {
+  const c = document.getElementById('card');
+  const data = type === 'umrah' ? t('uData') : t('hData');
+  const state = type === 'umrah' ? S_UMRAH : S_HAJJ;
+  const total = data.length;
+  const completed = data.filter((_, i) => state[type.charAt(0)+i]).length;
+  const percent = Math.round((completed / total) * 100);
+
+  let html = `
+    <div class="status-bar"><span>${t('tProg')}: ${completed} / ${total} ${t('tSteps')}</span><span style="color:#1D9E75;">${percent}%</span></div>
+    <div class="prog" style="margin-bottom:1.5rem;"><div style="width:100%; background:var(--color-background-tertiary); height:6px; border-radius:4px; overflow:hidden;"><div style="width:${percent}%; background:#1D9E75; height:100%;"></div></div></div>
+    <div class="tracker-list">
+  `;
+  data.forEach((item, index) => {
+    const isDone = state[type.charAt(0)+index];
+    html += `
+      <div class="tracker-card ${isDone ? 'completed' : ''}" onclick="toggleTracker('${type}', '${type.charAt(0)+index}')">
+        <div class="tracker-img-wrap"><span>${t('tImgPlace')}${item.t} ]</span></div>
+        <div class="tracker-content">
+          <div class="tracker-text"><div class="tracker-title">${t('tStepWord')} ${index + 1}: ${item.t}</div><div class="tracker-desc">${item.d}</div></div>
+          <div class="tracker-check">${isDone ? '✓' : ''}</div>
+        </div>
+      </div>
+    `;
+  });
+  html += `</div><div style="text-align:center; margin-top:2rem;"><button class="nav-btn" onclick="clearTracker('${type}')">${t('resetProg')}</button></div>`;
+  c.innerHTML = html;
+}
+function toggleTracker(type, id) {
+  if (type === 'umrah') { S_UMRAH[id] = !S_UMRAH[id]; localStorage.setItem('umrahState', JSON.stringify(S_UMRAH)); }
+  else { S_HAJJ[id] = !S_HAJJ[id]; localStorage.setItem('hajjState', JSON.stringify(S_HAJJ)); }
+  renderApp();
+}
+function clearTracker(type) {
+  if (type === 'umrah') { S_UMRAH = {u0:false,u1:false,u2:false,u3:false}; localStorage.setItem('umrahState', JSON.stringify(S_UMRAH)); }
+  else { S_HAJJ = {h0:false,h1:false,h2:false,h3:false,h4:false}; localStorage.setItem('hajjState', JSON.stringify(S_HAJJ)); }
+  renderApp();
+}
+
+function renderHifdh() {
+  const c = document.getElementById('card');
+  const { style, page, hidden, maxPages } = S_HIFDH;
+  c.innerHTML = `
+    <div style="display:flex; justify-content:space-between; margin-bottom:1rem; align-items:center;">
+      <div class="segmented-control">
+        <button class="segmented-btn ${style==='15line'?'active':''}" onclick="S_HIFDH.style='15line';renderApp()">${t('hf15')}</button>
+        <button class="segmented-btn ${style==='16line'?'active':''}" onclick="S_HIFDH.style='16line';renderApp()">${t('hf16')}</button>
+      </div>
+      <button class="nav-btn ${hidden?'prim':''}" style="padding:6px 12px; flex:none;" onclick="S_HIFDH.hidden=!S_HIFDH.hidden;renderApp()">
+        ${hidden ? t('hfShow') : t('hfHide')}
+      </button>
+    </div>
+    <div class="hifdh-viewer">
+      <img src="https://via.placeholder.com/450x650/E1F5EE/0F6E56?text=${encodeURIComponent('Page ' + page)}" class="hifdh-img ${hidden ? 'hidden-mode' : ''}">
+      ${hidden ? `<div class="hifdh-overlay">${t('hfMode')}</div>` : ''}
+    </div>
+    <div class="row" style="border:none; padding-bottom:0; justify-content:center; gap:16px;">
+      <button class="nav-btn" style="flex:none" onclick="S_HIFDH.page=Math.max(1,page-1);renderApp()" ${page===1?'disabled':''}>${t('btnBack')}</button>
+      <span style="font-weight:500; font-size:15px;">${t('hfPage')} ${page} / ${maxPages}</span>
+      <button class="nav-btn" style="flex:none" onclick="S_HIFDH.page=Math.min(maxPages,page+1);renderApp()" ${page===maxPages?'disabled':''}>${t('btnNext')}</button>
+    </div>
+  `;
+}
+
+// Boot
 renderApp();
 </script>
 </body>
