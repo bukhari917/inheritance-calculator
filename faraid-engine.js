@@ -123,8 +123,18 @@ const BLOCKING_RULES = [
   { blocker: 'fullBrother', blocked: 'halfBrotherP',
     reason: 'Full brother blocks paternal half-brother by agnate priority (Tarjeeh)' },
 
+  // TODO — Paternal Grandfather (pGrandfather) blocking rules.
+  // Once 'pGrandfather' is added to HEIR_RULES and normalizeHeirs(), add:
+  //   Hanafi  (grandfatherBlocksBrothers: true):
+  //     { blocker: 'pGrandfather', blocked: 'fullBrother',  reason: '...' }
+  //     { blocker: 'pGrandfather', blocked: 'fullSister',   reason: '...' }
+  //   Shafi'i / Maliki / Hanbali (grandfatherBlocksBrothers: false):
+  //     No BLOCKING_RULES entry — grandfather shares via muqasamah in distributeResidue().
+  // applyBlockingRules() must read MADHAB_RULES[madhab].grandfatherBlocksBrothers
+  // to decide whether to apply these entries at runtime.
+  //
   // TODO: son blocks son's son; father blocks grandfather;
-  //       sons block nephews; grandfather blocks paternal half-siblings (Shafi'i/Maliki/Hanbali)
+  //       sons block nephews; grandfather blocks paternal half-siblings
 ];
 
 
@@ -137,13 +147,21 @@ const MADHAB_RULES = {
     applyGharrawayn:        true,
     // Radd: mainstream Hanafi excludes spouses (same as others)
     raddIncludesSpouse:     false,
-    // Grandfather vs brothers: Hanafi — grandfather SHARES with brothers
-    // (Shafi'i / Maliki / Hanbali: grandfather BLOCKS brothers — see stubs below)
-    grandfatherBlocksBrothers: false,
+    // Grandfather vs brothers: Hanafi (Abu Hanifa) — grandfather treated as father,
+    // therefore he BLOCKS brothers completely (Hijab al-Hirman).
+    // (Shafi'i / Maliki / Hanbali: follow Zayd ibn Thabit — grandfather SHARES
+    //  with brothers via muqasamah, taking the most favourable of 1/3, muqasamah, or 1/6)
+    //
+    // ⚠️  STUB — not yet wired to the engine.
+    // 'pGrandfather' is not in HEIR_RULES or normalizeHeirs(), so this flag has no
+    // effect on calculations today. When grandfather support is added, applyBlockingRules()
+    // must read MADHAB_RULES[madhab].grandfatherBlocksBrothers and conditionally push
+    // the blocking entry for 'pGrandfather' → 'fullBrother' / 'fullSister'.
+    grandfatherBlocksBrothers: true,
   },
-  shafii:  { applyGharrawayn: true, raddIncludesSpouse: false, grandfatherBlocksBrothers: true,  _TODO: true },
-  maliki:  { applyGharrawayn: true, raddIncludesSpouse: false, grandfatherBlocksBrothers: true,  _TODO: true },
-  hanbali: { applyGharrawayn: true, raddIncludesSpouse: false, grandfatherBlocksBrothers: true,  _TODO: true },
+  shafii:  { applyGharrawayn: true, raddIncludesSpouse: false, grandfatherBlocksBrothers: false, _TODO: true },
+  maliki:  { applyGharrawayn: true, raddIncludesSpouse: false, grandfatherBlocksBrothers: false, _TODO: true },
+  hanbali: { applyGharrawayn: true, raddIncludesSpouse: false, grandfatherBlocksBrothers: false, _TODO: true },
 };
 
 // END OF BLOCK A
@@ -259,13 +277,13 @@ function assignFixedShares(heirList, s, madhab) {
   }
 
   // ── Wife / Wives ───────────────────────────────────────────────────
-  // All wives share a single collective portion; each receives (collective / count).
+  // h.fraction stores the COLLECTIVE share for all wives (1/4 or 1/8).
+  // Per-wife split is done only at display time in expandHeirsForDisplay().
+  // Storing collective here keeps fixedTotal, residue, and Awl/Radd arithmetic correct.
   const wifeH = get('wife');
   if (wifeH) {
-    const collective  = hasChild ? Frac.make(1, 8) : Frac.make(1, 4);
-    wifeH.groupFrac   = collective;   // stored for Gharrawayn calculation & display
-    wifeH.fraction    = Frac.div(collective, Frac.make(wifeH.count, 1));
-    wifeH.shareType   = 'fixed';
+    wifeH.fraction  = hasChild ? Frac.make(1, 8) : Frac.make(1, 4);
+    wifeH.shareType = 'fixed';
   }
 
   // ── Mother ─────────────────────────────────────────────────────────
@@ -336,10 +354,11 @@ function assignFixedShares(heirList, s, madhab) {
   // Apply only if madhab config enables it (all four madhabs do).
   let gharrawaynApplied = false;
   if (cfg.applyGharrawayn && !hasChild && (hasHusband || hasWife) && hasMother && hasFather) {
-    // Use the collective spouse fraction for Gharrawayn calculation
+    // Use the collective spouse fraction for Gharrawayn calculation.
+    // wifeH.fraction is already the collective share after the fix above.
     const spouseGroupFrac = hasHusband
-      ? husbandH.fraction               // husband's personal share = his total share
-      : wifeH.groupFrac;                // wives' collective share (not per-wife fraction)
+      ? husbandH.fraction   // husband's share = his total (no split needed)
+      : wifeH.fraction;     // wives' collective share
 
     const remainderAfterSpouse = Frac.sub(Frac.ONE, spouseGroupFrac);
     // Mother gets exactly 1/3 of what remains (= ⅓ of remainder)
@@ -443,9 +462,7 @@ function distributeResidue(heirList, s, awlApplied) {
   // Daughters-only case: father already holds his 1/6 fixed; add residue on top.
   // No-children case: father's fraction was 0; he receives all residue.
   if (fatherH) {
-    fatherH.fraction  = Frac.add(fatherH.fraction, residue);
-    // Normalise shareType for accurate display / explanation
-    if (fatherH.shareType === 'residue') fatherH.shareType = 'residue';
+    fatherH.fraction = Frac.add(fatherH.fraction, residue);
     return;
   }
 
@@ -706,15 +723,25 @@ function expandHeirsForDisplay(activeHeirs) {
   const display = [];
   for (const h of activeHeirs) {
     if (h.id === 'wife' && h.count > 1) {
-      // Show each wife individually — each receives the same per-wife fraction
+      // Wives are expanded into individual rows because Islamic law assigns each wife
+      // a distinct personal share; the UI must show "Wife 1 = 1/24" not "3 Wives = 1/8".
+      // Sons, daughters, and siblings are intentionally kept as a single grouped row
+      // (e.g. "2 Sons — 7/12 shared equally") because Shariah treats them as a
+      // homogeneous pool with no heir-specific distinction at this display level.
+      const perWife = Frac.div(h.fraction, Frac.make(h.count, 1));
       for (let i = 1; i <= h.count; i++) {
-        display.push({ ...h, displayName: `Wife ${i}` });
+        // count: 1 — each row represents exactly one person; the original count is
+        // only meaningful on the engine object, not on an individual display row.
+        display.push({ ...h, displayName: `Wife ${i}`, fraction: perWife, count: 1 });
       }
+    } else if (h.id === 'wife') {
+      // Single wife: collective share === per-wife share (collective / 1 = collective)
+      display.push({ ...h, displayName: 'Wife', count: 1 });
     } else {
       const rule = HEIR_RULES[h.id] || {};
       let name   = rule.label || h.id;
-      // Pluralise label when count > 1 (e.g. "2 Sons", "3 Daughters")
-      if (h.count > 1 && h.id !== 'wife') name = `${h.count} ${name}s`;
+      // Pluralise label for grouped heirs (e.g. "2 Sons", "3 Daughters")
+      if (h.count > 1) name = `${h.count} ${name}s`;
       display.push({ ...h, displayName: name });
     }
   }
@@ -921,15 +948,15 @@ const FARAID_TEST_CASES = [
     expectBlocked: ['fullBrother'],
   },
 
-  // ── Test 6: 3 Wives — collective share then per-wife division ────────────
+  // ── Test 6: 3 Wives — collective share stored; per-wife only at display time ──
   // Male deceased, 3 wives, 1 son, 1 daughter.
-  //   Wives collective (children present): 1/8 → per wife: 1/24
-  //   Son + Daughter take residue 2:1. No fixed fractions for them here.
-  //   Son: residue × 2/3 (2 units out of 3) | Daughter: residue × 1/3
+  //   Wives collective (children present): 1/8  (engine stores this)
+  //   Per-wife display value: 1/24  (expandHeirsForDisplay divides by 3)
   //   Residue = 1 - 1/8 = 7/8
-  //   Son: 7/8 × 2/3 = 14/24 = 7/12 | Daughter: 7/8 × 1/3 = 7/24
+  //   Son (2 units) + Daughter (1 unit) → total 3 units
+  //   Son: 7/8 × 2/3 = 7/12 | Daughter: 7/8 × 1/3 = 7/24
   {
-    label: '3 Wives + 1 Son + 1 Daughter — per-wife share',
+    label: '3 Wives + 1 Son + 1 Daughter — collective wife share in engine',
     state: {
       gender: 'male', hasHusband: false, numWives: 3,
       sons: 1, daughters: 1,
@@ -937,7 +964,8 @@ const FARAID_TEST_CASES = [
       fullBrothers: 0, fullSisters: 0, uterineSiblings: 0,
       madhab: 'hanafi',
     },
-    expect: { wife: '1/24', son: '7/12', daughter: '7/24' },
+    // wife fraction in activeHeirs is the COLLECTIVE share (1/8), not per-wife (1/24)
+    expect: { wife: '1/8', son: '7/12', daughter: '7/24' },
     expectFlags: { awlApplied: false, raddApplied: false },
   },
 ];
