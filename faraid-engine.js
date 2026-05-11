@@ -123,8 +123,18 @@ const BLOCKING_RULES = [
   { blocker: 'fullBrother', blocked: 'halfBrotherP',
     reason: 'Full brother blocks paternal half-brother by agnate priority (Tarjeeh)' },
 
+  // TODO — Paternal Grandfather (pGrandfather) blocking rules.
+  // Once 'pGrandfather' is added to HEIR_RULES and normalizeHeirs(), add:
+  //   Hanafi  (grandfatherBlocksBrothers: true):
+  //     { blocker: 'pGrandfather', blocked: 'fullBrother',  reason: '...' }
+  //     { blocker: 'pGrandfather', blocked: 'fullSister',   reason: '...' }
+  //   Shafi'i / Maliki / Hanbali (grandfatherBlocksBrothers: false):
+  //     No BLOCKING_RULES entry — grandfather shares via muqasamah in distributeResidue().
+  // applyBlockingRules() must read MADHAB_RULES[madhab].grandfatherBlocksBrothers
+  // to decide whether to apply these entries at runtime.
+  //
   // TODO: son blocks son's son; father blocks grandfather;
-  //       sons block nephews; grandfather blocks paternal half-siblings (Shafi'i/Maliki/Hanbali)
+  //       sons block nephews; grandfather blocks paternal half-siblings
 ];
 
 
@@ -141,6 +151,12 @@ const MADHAB_RULES = {
     // therefore he BLOCKS brothers completely (Hijab al-Hirman).
     // (Shafi'i / Maliki / Hanbali: follow Zayd ibn Thabit — grandfather SHARES
     //  with brothers via muqasamah, taking the most favourable of 1/3, muqasamah, or 1/6)
+    //
+    // ⚠️  STUB — not yet wired to the engine.
+    // 'pGrandfather' is not in HEIR_RULES or normalizeHeirs(), so this flag has no
+    // effect on calculations today. When grandfather support is added, applyBlockingRules()
+    // must read MADHAB_RULES[madhab].grandfatherBlocksBrothers and conditionally push
+    // the blocking entry for 'pGrandfather' → 'fullBrother' / 'fullSister'.
     grandfatherBlocksBrothers: true,
   },
   shafii:  { applyGharrawayn: true, raddIncludesSpouse: false, grandfatherBlocksBrothers: false, _TODO: true },
@@ -707,19 +723,25 @@ function expandHeirsForDisplay(activeHeirs) {
   const display = [];
   for (const h of activeHeirs) {
     if (h.id === 'wife' && h.count > 1) {
-      // h.fraction is the collective share; divide by count for each wife's individual share
+      // Wives are expanded into individual rows because Islamic law assigns each wife
+      // a distinct personal share; the UI must show "Wife 1 = 1/24" not "3 Wives = 1/8".
+      // Sons, daughters, and siblings are intentionally kept as a single grouped row
+      // (e.g. "2 Sons — 7/12 shared equally") because Shariah treats them as a
+      // homogeneous pool with no heir-specific distinction at this display level.
       const perWife = Frac.div(h.fraction, Frac.make(h.count, 1));
       for (let i = 1; i <= h.count; i++) {
-        display.push({ ...h, displayName: `Wife ${i}`, fraction: perWife });
+        // count: 1 — each row represents exactly one person; the original count is
+        // only meaningful on the engine object, not on an individual display row.
+        display.push({ ...h, displayName: `Wife ${i}`, fraction: perWife, count: 1 });
       }
     } else if (h.id === 'wife') {
-      // Single wife: collective === per-wife, no division needed
-      display.push({ ...h, displayName: 'Wife' });
+      // Single wife: collective share === per-wife share (collective / 1 = collective)
+      display.push({ ...h, displayName: 'Wife', count: 1 });
     } else {
       const rule = HEIR_RULES[h.id] || {};
       let name   = rule.label || h.id;
-      // Pluralise label when count > 1 (e.g. "2 Sons", "3 Daughters")
-      if (h.count > 1 && h.id !== 'wife') name = `${h.count} ${name}s`;
+      // Pluralise label for grouped heirs (e.g. "2 Sons", "3 Daughters")
+      if (h.count > 1) name = `${h.count} ${name}s`;
       display.push({ ...h, displayName: name });
     }
   }
