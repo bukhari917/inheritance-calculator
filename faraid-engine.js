@@ -421,18 +421,14 @@ function applyAwl(heirList, fixedTotal) {
 //
 // TODO for extended heirs: paternal grandfather → paternal half-brothers →
 //   their sons → paternal uncles → their sons (priority per classical order).
-function distributeResidue(heirList, s, awlApplied) {
+function distributeResidue(heirList, s, awlApplied, fixedTotal) {
   // ʿAwl consumed 100% — nothing to distribute
   if (awlApplied) return;
 
   const get = id => heirList.find(h => h.id === id && !h.blocked);
 
-  // Residue = 1 − (sum of all currently assigned fractions)
-  let assigned = Frac.ZERO;
-  for (const h of heirList) {
-    if (!h.blocked) assigned = Frac.add(assigned, h.fraction);
-  }
-  const residue = Frac.sub(Frac.ONE, assigned);
+  // Residue = 1 − fixedTotal (Quranic fixed shares already assigned)
+  const residue = Frac.sub(Frac.ONE, fixedTotal);
   if (!Frac.isPos(residue)) return;
 
   const sonH      = get('son');
@@ -688,7 +684,7 @@ function computeInheritance() {
   const { awlApplied, awlFactor } = applyAwl(heirList, fixedTotal);
 
   // 5 — Distribute residue to agnate heirs (ʿaṣaba)
-  distributeResidue(heirList, s, awlApplied);
+  distributeResidue(heirList, s, awlApplied, fixedTotal);
 
   // 6 — Radd: return any surplus to fixed-share heirs (excluding spouses)
   const { raddApplied } = applyRadd(heirList, s, madhab);
@@ -965,6 +961,21 @@ const FARAID_TEST_CASES = [
       madhab: 'hanafi',
     },
     // wife fraction in activeHeirs is the COLLECTIVE share (1/8), not per-wife (1/24)
+    expect: { wife: '1/8', son: '7/12', daughter: '7/24' },
+    expectFlags: { awlApplied: false, raddApplied: false },
+  },
+  // Test 7: 1 Wife + 1 Son + 1 Daughter
+  //   Wife: 1/8 (has children). Residue: 7/8. Son 2 units, daughter 1 unit → 3 units.
+  //   Son: 7/8 × 2/3 = 7/12 | Daughter: 7/8 × 1/3 = 7/24. Total = 1/8 + 7/12 + 7/24 = 1.
+  {
+    label: '1 Wife + 1 Son + 1 Daughter — residue distributed correctly (regression)',
+    state: {
+      gender: 'male', hasHusband: false, numWives: 1,
+      sons: 1, daughters: 1,
+      fatherAlive: false, motherAlive: false,
+      fullBrothers: 0, fullSisters: 0, uterineSiblings: 0,
+      madhab: 'hanafi',
+    },
     expect: { wife: '1/8', son: '7/12', daughter: '7/24' },
     expectFlags: { awlApplied: false, raddApplied: false },
   },
