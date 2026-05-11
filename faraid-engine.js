@@ -421,7 +421,7 @@ function applyAwl(heirList, fixedTotal) {
 //
 // TODO for extended heirs: paternal grandfather → paternal half-brothers →
 //   their sons → paternal uncles → their sons (priority per classical order).
-function distributeResidue(heirList, s, awlApplied, fixedTotal) {
+function distributeResidue(heirList, s, awlApplied, fixedTotal = Frac.ZERO) {
   // ʿAwl consumed 100% — nothing to distribute
   if (awlApplied) return;
 
