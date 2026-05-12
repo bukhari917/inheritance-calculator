@@ -186,7 +186,7 @@ const DICT = {
     // Zakat
     zTitle: "Zakat Calculator",
     zDesc: "Calculate your 2.5% obligatory charity",
-    zSteps: ['Currency', 'Assets', 'Debts', 'Results'],
+    zSteps: ['Assets', 'Debts', 'Results'],
     zS0T: "Currency & Nisab",
     zS0D: "Select your currency, choose a nisab basis, then enter today's market price to calculate the nisab threshold.",
     zS0PickCurr: "Select Currency",
@@ -310,7 +310,7 @@ const DICT = {
     // Zakat
     zTitle: "زکوٰۃ کیلکولیٹر",
     zDesc: "اپنی 2.5٪ فرض زکوٰۃ کا حساب لگائیں",
-    zSteps: ['کرنسی', 'اثاثے', 'قرضے', 'نتائج'],
+    zSteps: ['اثاثے', 'قرضے', 'نتائج'],
     zS0T: "کرنسی اور نصاب",
     zS0D: "اپنی کرنسی منتخب کریں، نصاب کی بنیاد چنیں، اور نصاب حساب کرنے کے لیے آج کی بازار قیمت درج کریں۔",
     zS0PickCurr: "کرنسی منتخب کریں",
@@ -578,60 +578,59 @@ function Tog(lbl,k){return`<div class="row"><label>${lbl}</label><div class="tog
 function Inp(lbl, k){const sym=S_ZAK.currencySymbol||'¤';return`<div class="row"><label>${lbl}</label><div class="input-wrapper"><span class="input-prefix">${sym}</span><input type="number" class="val-input" placeholder="0" value="${S_ZAK[k]}" oninput="updateZakat('${k}',this.value)"></div></div>`;}
 
 // ==== TOOLS ====
+function zakCurrencyBar() {
+  const sym = S_ZAK.currencySymbol || '¤';
+  const btns = ZAKAT_CURRENCIES.map((cur, i) =>
+    `<button class="choice-btn${S_ZAK.currency===cur.code?' sel':''}" onclick="selectZakatCurrencyByIdx(${i})">${cur.label}</button>`
+  ).join('');
+  const isOther = S_ZAK.currency === 'OTHER';
+  const otherInput = isOther
+    ? `<input type="text" class="val-input" style="width:80px;text-align:center;margin-top:6px" placeholder="symbol" maxlength="6" value="${S_ZAK.customSymbol}" oninput="S_ZAK.customSymbol=this.value;S_ZAK.currencySymbol=this.value;renderApp();">`
+    : '';
+  const isGold   = S_ZAK.nisabBasis === 'gold';
+  const priceKey = isGold ? 'goldPricePerGram' : 'silverPricePerGram';
+  const priceVal = isGold ? S_ZAK.goldPricePerGram : S_ZAK.silverPricePerGram;
+  const priceLbl = isGold ? t('zS0GoldPrice') : t('zS0SilverPrice');
+  const grams    = isGold ? GOLD_NISAB_GRAMS : SILVER_NISAB_GRAMS;
+  const nisabPreview = Number(priceVal) > 0
+    ? `<span style="font-size:12px;color:#0F6E56;margin-left:6px">→ Nisab ≈ ${sym}${(Number(priceVal)*grams).toLocaleString(undefined,{maximumFractionDigits:0})}</span>`
+    : `<span style="font-size:12px;color:var(--color-text-tertiary);margin-left:6px">enter price to compute nisab</span>`;
+  return `
+    <div style="background:#F0FDF4;border:1px solid #9FE1CB;border-radius:8px;padding:12px;margin-bottom:14px">
+      <p style="font-size:11px;font-weight:700;color:#0F6E56;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">${t('zS0PickCurr')}</p>
+      <div class="choices" style="margin-top:0">${btns}</div>
+      ${otherInput}
+      <div style="display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap">
+        <button class="tog-btn${isGold?' on':''}" onclick="setZakatNisabBasis('gold')" style="font-size:12px;padding:4px 10px">${t('zS0Gold')}</button>
+        <button class="tog-btn${!isGold?' on':''}" onclick="setZakatNisabBasis('silver')" style="font-size:12px;padding:4px 10px">${t('zS0Silver')}</button>
+        <div class="input-wrapper" style="margin-left:auto">
+          <span class="input-prefix" style="font-size:13px">${sym}</span>
+          <input type="number" class="val-input" style="width:100px" placeholder="price/g" min="0" step="0.01" value="${priceVal}" oninput="updateZakat('${priceKey}',this.value);renderApp();">
+        </div>
+      </div>
+      <p style="font-size:12px;color:#0F6E56;margin-top:6px">${priceLbl} ${nisabPreview}</p>
+    </div>`;
+}
+
 function renderZakat() {
   const c = document.getElementById('card');
   const sym = S_ZAK.currencySymbol || '¤';
 
   if (step === 0) {
-    const currBtns = ZAKAT_CURRENCIES.map((cur, i) =>
-      `<button class="choice-btn${S_ZAK.currency===cur.code?' sel':''}" onclick="selectZakatCurrencyByIdx(${i})">${cur.label}</button>`
-    ).join('');
-    const isOther  = S_ZAK.currency === 'OTHER';
-    const otherRow = isOther ? `<div class="row" style="margin-top:0.5rem"><label>${t('zS0Other')}</label><div class="input-wrapper"><input type="text" class="val-input" style="width:90px;text-align:center" placeholder="e.g. ₦" maxlength="6" value="${S_ZAK.customSymbol}" oninput="S_ZAK.customSymbol=this.value;S_ZAK.currencySymbol=this.value;"></div></div>` : '';
-    const isGold   = S_ZAK.nisabBasis === 'gold';
-    const priceKey = isGold ? 'goldPricePerGram' : 'silverPricePerGram';
-    const priceVal = isGold ? S_ZAK.goldPricePerGram : S_ZAK.silverPricePerGram;
-    const priceLbl = isGold ? t('zS0GoldPrice') : t('zS0SilverPrice');
-    const grams    = isGold ? GOLD_NISAB_GRAMS : SILVER_NISAB_GRAMS;
-    const preview  = Number(priceVal) > 0
-      ? `<span style="font-size:12px;color:#0F6E56;margin-left:6px">→ Nisab = ${sym}${(Number(priceVal)*grams).toLocaleString(undefined,{maximumFractionDigits:2})}</span>`
-      : '';
     c.innerHTML = `
-      <p class="step-title">${t('zS0T')}</p>
-      <p class="step-desc">${t('zS0D')}</p>
-      <p style="font-size:11px;font-weight:600;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.07em;margin:1rem 0 6px">${t('zS0PickCurr')}</p>
-      <div class="choices">${currBtns}</div>
-      ${otherRow}
-      <p style="font-size:13px;color:#0F6E56;font-weight:500;margin:8px 0 0">Selected: <strong>${S_ZAK.currency}${sym && sym!==S_ZAK.currency?' ('+sym+')':''}</strong></p>
-      <p style="font-size:11px;font-weight:600;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.07em;margin:1.25rem 0 6px">${t('zS0NisabBasis')}</p>
-      <div style="display:flex;gap:8px;margin-bottom:1rem">
-        <button class="tog-btn${S_ZAK.nisabBasis==='gold'?' on':''}" onclick="setZakatNisabBasis('gold')">${t('zS0Gold')}</button>
-        <button class="tog-btn${S_ZAK.nisabBasis==='silver'?' on':''}" onclick="setZakatNisabBasis('silver')">${t('zS0Silver')}</button>
-      </div>
-      <div class="row">
-        <label>${priceLbl}${preview}</label>
-        <div class="input-wrapper">
-          <span class="input-prefix">${sym}</span>
-          <input type="number" class="val-input" placeholder="0.00" min="0" step="0.01" value="${priceVal}" oninput="updateZakat('${priceKey}',this.value);renderApp();">
-        </div>
-      </div>
-      <div class="verse-note">${t('zS0Note')}</div>`;
-
-  } else if (step === 1) {
-    const badge = `<span style="display:inline-block;margin-left:8px;padding:2px 8px;border-radius:10px;background:#E1F5EE;color:#0F6E56;font-size:12px;font-weight:600;border:1px solid #9FE1CB">${S_ZAK.currency}${sym !== S_ZAK.currency ? ' '+sym : ''}</span>`;
-    c.innerHTML = `
-      <p class="step-title">${t('zS1T')} ${badge}</p><p class="step-desc">${t('zS1D')}</p>
+      <p class="step-title">${t('zS1T')}</p>
+      <p class="step-desc">${t('zS1D')}</p>
+      ${zakCurrencyBar()}
       ${Inp(t('zS1Cash'), 'cash')}${Inp(t('zS1Gold'), 'gold')}${Inp(t('zS1Silver'), 'silver')}${Inp(t('zS1Biz'), 'business')}
       <div class="verse-note">${t('zS1Note')}</div>`;
 
-  } else if (step === 2) {
-    const badge = `<span style="display:inline-block;margin-left:8px;padding:2px 8px;border-radius:10px;background:#E1F5EE;color:#0F6E56;font-size:12px;font-weight:600;border:1px solid #9FE1CB">${S_ZAK.currency}${sym !== S_ZAK.currency ? ' '+sym : ''}</span>`;
+  } else if (step === 1) {
     c.innerHTML = `
-      <p class="step-title">${t('zS2T')} ${badge}</p><p class="step-desc">${t('zS2D')}</p>
+      <p class="step-title">${t('zS2T')}</p><p class="step-desc">${t('zS2D')}</p>
       ${Inp(t('zS2Debt'), 'debts')}
       <div class="verse-note">${t('zS2Note')}</div>`;
 
-  } else if (step === 3) {
+  } else if (step === 2) {
     const cash = Number(S_ZAK.cash)||0, gold = Number(S_ZAK.gold)||0,
           silver = Number(S_ZAK.silver)||0, biz = Number(S_ZAK.business)||0,
           debts = Number(S_ZAK.debts)||0;
@@ -640,8 +639,7 @@ function renderZakat() {
     const nisab       = computeZakatNisab();
     const fmt = n => `${sym}${n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`;
     const basisLabel  = S_ZAK.nisabBasis === 'gold'
-      ? `Gold nisab (${GOLD_NISAB_GRAMS}g)`
-      : `Silver nisab (${SILVER_NISAB_GRAMS}g)`;
+      ? `Gold (${GOLD_NISAB_GRAMS}g)` : `Silver (${SILVER_NISAB_GRAMS}g)`;
 
     let nisabRow = nisab > 0
       ? `<div class="row" style="padding:6px 0;"><label>${t('zS3NisabThreshold')} <span style="font-size:11px;color:var(--color-text-tertiary)">(${basisLabel})</span></label><span>${fmt(nisab)}</span></div>`
@@ -655,13 +653,10 @@ function renderZakat() {
         <div class="row" style="padding:6px 0;border-top:1px solid var(--color-border-secondary);font-weight:600;"><label>${t('zS3Net')}</label><span>${fmt(netWorth)}</span></div>
         ${nisabRow}
       </div>`;
-
     if (nisab > 0) {
-      if (netWorth >= nisab) {
-        html += `<div class="alert success">${t('zS3NisabReach')}</div><div class="total-row" style="margin-top:1rem;"><span class="total-label">${t('zS3Due')}</span><span class="total-val">${fmt(netWorth*0.025)}</span></div>`;
-      } else {
-        html += `<div class="alert">${t('zS3Below')}</div><div class="total-row" style="margin-top:1rem;opacity:0.6;"><span class="total-label">${t('zS3NotDue')}</span><span class="total-val">${fmt(0)}</span></div>`;
-      }
+      html += netWorth >= nisab
+        ? `<div class="alert success">${t('zS3NisabReach')}</div><div class="total-row" style="margin-top:1rem;"><span class="total-label">${t('zS3Due')}</span><span class="total-val">${fmt(netWorth*0.025)}</span></div>`
+        : `<div class="alert">${t('zS3Below')}</div><div class="total-row" style="margin-top:1rem;opacity:0.6;"><span class="total-label">${t('zS3NotDue')}</span><span class="total-val">${fmt(0)}</span></div>`;
     }
     c.innerHTML = html;
   }
