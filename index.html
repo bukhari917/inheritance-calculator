@@ -561,6 +561,12 @@ function selectZakatCurrency(code, symbol) {
   S_ZAK.currencySymbol = code === 'OTHER' ? (S_ZAK.customSymbol || '') : symbol;
   renderApp();
 }
+function selectZakatCurrencyByIdx(i) {
+  const cur = ZAKAT_CURRENCIES[i];
+  S_ZAK.currency = cur.code;
+  S_ZAK.currencySymbol = cur.code === 'OTHER' ? (S_ZAK.customSymbol || '') : cur.symbol;
+  renderApp();
+}
 function setZakatNisabBasis(basis) { S_ZAK.nisabBasis = basis; renderApp(); }
 function computeZakatNisab() {
   if (S_ZAK.nisabBasis === 'gold') return (Number(S_ZAK.goldPricePerGram) || 0) * GOLD_NISAB_GRAMS;
@@ -577,8 +583,8 @@ function renderZakat() {
   const sym = S_ZAK.currencySymbol || '¤';
 
   if (step === 0) {
-    const currBtns = ZAKAT_CURRENCIES.map(cur =>
-      `<button class="choice-btn${S_ZAK.currency===cur.code?' sel':''}" data-code="${cur.code}" data-sym="${encodeURIComponent(cur.symbol)}" onclick="selectZakatCurrency(this.dataset.code,decodeURIComponent(this.dataset.sym))">${cur.label}</button>`
+    const currBtns = ZAKAT_CURRENCIES.map((cur, i) =>
+      `<button class="choice-btn${S_ZAK.currency===cur.code?' sel':''}" onclick="selectZakatCurrencyByIdx(${i})">${cur.label}</button>`
     ).join('');
     const isOther  = S_ZAK.currency === 'OTHER';
     const otherRow = isOther ? `<div class="row" style="margin-top:0.5rem"><label>${t('zS0Other')}</label><div class="input-wrapper"><input type="text" class="val-input" style="width:90px;text-align:center" placeholder="e.g. ₦" maxlength="6" value="${S_ZAK.customSymbol}" oninput="S_ZAK.customSymbol=this.value;S_ZAK.currencySymbol=this.value;"></div></div>` : '';
