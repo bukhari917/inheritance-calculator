@@ -602,15 +602,17 @@ function renderZakat() {
       <p style="font-size:11px;font-weight:600;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.07em;margin:1rem 0 6px">${t('zS0PickCurr')}</p>
       <div class="choices">${currBtns}</div>
       ${otherRow}
+      <p style="font-size:13px;color:#0F6E56;font-weight:500;margin:8px 0 0">Selected: <strong>${S_ZAK.currency}${sym && sym!==S_ZAK.currency?' ('+sym+')':''}</strong></p>
       <p style="font-size:11px;font-weight:600;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.07em;margin:1.25rem 0 6px">${t('zS0NisabBasis')}</p>
       <div style="display:flex;gap:8px;margin-bottom:1rem">
         <button class="tog-btn${S_ZAK.nisabBasis==='gold'?' on':''}" onclick="setZakatNisabBasis('gold')">${t('zS0Gold')}</button>
         <button class="tog-btn${S_ZAK.nisabBasis==='silver'?' on':''}" onclick="setZakatNisabBasis('silver')">${t('zS0Silver')}</button>
       </div>
       <div class="row">
-        <label>${priceLbl} (${S_ZAK.currency==='OTHER'?'your currency':S_ZAK.currency})${preview}</label>
+        <label>${priceLbl}${preview}</label>
         <div class="input-wrapper">
-          <input type="number" class="val-input" placeholder="0.00" min="0" step="0.01" value="${priceVal}" oninput="updateZakat('${priceKey}',this.value)">
+          <span class="input-prefix">${sym}</span>
+          <input type="number" class="val-input" placeholder="0.00" min="0" step="0.01" value="${priceVal}" oninput="updateZakat('${priceKey}',this.value);renderApp();">
         </div>
       </div>
       <div class="verse-note">${t('zS0Note')}</div>`;
