@@ -36,8 +36,7 @@ body.rtl .tracker-content { padding-right: 12px; padding-left: 0; }
 .wrap{max-width:560px;margin:0 auto;padding:1.5rem 1rem; position: relative;}
 .hdr{text-align:center;margin-bottom:1.5rem;position:relative;}
 .back-btn{position:absolute;left:0;top:50%;transform:translateY(-50%);background:none;border:none;color:#1D9E75;font-size:14px;cursor:pointer;font-weight:500;display:none;font-family:inherit;}
-.back-btn:hover{text-decoration:underline;}
-.lang-btn{position:absolute;right:0;top:50%;transform:translateY(-50%);background:var(--color-background-secondary);border:1px solid var(--color-border-secondary);color:var(--color-text-primary);font-size:12px;padding:4px 10px;border-radius:16px;cursor:pointer;font-weight:600;font-family:inherit;}
+.back-btn:hover{text-decoration:underline;}\n.lang-btn{position:absolute;right:0;top:50%;transform:translateY(-50%);background:var(--color-background-secondary);border:1px solid var(--color-border-secondary);color:var(--color-text-primary);font-size:12px;padding:4px 10px;border-radius:16px;cursor:pointer;font-weight:600;font-family:inherit;}
 .lang-btn:hover{background:var(--color-border-tertiary);}
 
 .hdr h1{font-size:20px;font-weight:500;color:var(--color-text-primary)}
@@ -77,20 +76,13 @@ body.rtl .tracker-content { padding-right: 12px; padding-left: 0; }
 .tog-btn{padding:6px 16px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);font-size:13px;cursor:pointer;font-family:inherit; transition:all 0.15s;}
 .tog-btn.on{border:1px solid #1D9E75;background:#E1F5EE;color:#085041}
 
-/* Currency picker chips */
-.choices .choice-btn { padding: 7px 14px; font-size: 13px; }
-
-/* Input Fields for Zakat */
-.input-wrapper { display:flex; align-items:center; gap:8px; }
-.input-prefix { color: var(--color-text-secondary); font-weight: 500; }
 .val-input{width:120px;padding:8px 12px;border-radius:var(--border-radius-md);border:1px solid var(--color-border-secondary);font-size:15px;text-align:right;font-family:inherit;}
 .val-input:focus{outline:none;border-color:#1D9E75;box-shadow: 0 0 0 2px rgba(29,158,117,0.2);}
 
 .verse-note, .alert{margin-top:1rem;padding:10px 14px;border-radius:var(--border-radius-md);font-size:13px;line-height:1.6}
 .verse-note{background:var(--color-background-secondary);border-left:2px solid #1D9E75;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;color:var(--color-text-secondary);}
 .verse-ref{color:#0F6E56;font-weight:500}
-.alert{background:#FAEEDA;border-left:2px solid #EF9F27;color:#633806;}
-.alert.success{background:#E1F5EE;border-left:2px solid #1D9E75;color:#085041;}
+.alert{background:#FAEEDA;border-left:2px solid #EF9F27;color:#633806;}\n.alert.success{background:#E1F5EE;border-left:2px solid #1D9E75;color:#085041;}
 
 .nav{display:flex;justify-content:space-between;margin-top:12px; gap:8px;}
 .nav-btn{padding:9px 22px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);font-size:14px;cursor:pointer;font-family:inherit;font-weight:500;transition:all 0.15s; flex:1;}
@@ -100,44 +92,23 @@ body.rtl .tracker-content { padding-right: 12px; padding-left: 0; }
 .nav-btn:disabled{opacity:.4;cursor:not-allowed}
 
 /* Results Formatting */
-.dist-bar{display:flex;height:24px;border-radius:var(--border-radius-md);overflow:hidden;border:0.5px solid var(--color-border-tertiary);margin-bottom:1rem}
 .heir-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--border-radius-md);background:var(--color-background-secondary);margin-bottom:6px}
-.heir-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 .heir-info{flex:1}
 .heir-name{font-size:14px;color:var(--color-text-primary)}
-.heir-basis{font-size:11px;color:var(--color-text-tertiary);margin-top:2px}
 .heir-frac{text-align:right}
 .heir-f{font-size:16px;font-weight:500;color:var(--color-text-primary)}
-.heir-p{font-size:11px;color:var(--color-text-secondary)}
-.total-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:var(--border-radius-md);border:0.5px solid #9FE1CB;background:#E1F5EE;margin-top:10px}
-.total-label{font-size:14px;color:#085041;font-weight:500;}
-.total-val{font-size:16px;font-weight:600;color:#0F6E56}
 
-/* Visual Trackers */
+/* Trackers */
 .tracker-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; }
 .tracker-card { display: flex; flex-direction: column; border: 1px solid var(--color-border-secondary); border-radius: var(--border-radius-md); overflow: hidden; background: var(--color-background-primary); cursor: pointer; transition: all 0.2s; }
-.tracker-card:hover { border-color: #1D9E75; }
 .tracker-card.completed { background: #F0FDF4; border-color: #9FE1CB; opacity: 0.85; }
-.tracker-img-wrap { width: 100%; height: 120px; background: var(--color-background-tertiary); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--color-text-tertiary); font-size: 13px; }
 .tracker-content { padding: 1rem; display: flex; align-items: center; gap: 12px; }
 .tracker-text { flex: 1; }
 .tracker-title { font-size: 15px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 4px; }
 .tracker-card.completed .tracker-title { text-decoration: line-through; color: var(--color-text-secondary); }
-.tracker-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.4; }
 .tracker-check { width: 26px; height: 26px; border: 2px solid var(--color-border-secondary); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: white; transition: all 0.2s; }
 .tracker-card.completed .tracker-check { background: #1D9E75; border-color: #1D9E75; color: white; }
-.status-bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--color-background-secondary); border-radius: var(--border-radius-md); margin-bottom: 1rem; font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
 
-/* Hifdh */
-.hifdh-viewer { width:100%; min-height:480px; background:var(--color-background-secondary); border-radius:var(--border-radius-md); overflow:hidden; display:flex; align-items:center; justify-content:center; position:relative; border: 1px solid var(--color-border-tertiary); margin-bottom: 1rem; }
-.hifdh-img { max-width:100%; height:auto; display:block; transition: filter 0.3s ease, opacity 0.3s ease; }
-.hifdh-img.hidden-mode { filter: blur(12px); opacity: 0.4; }
-.hifdh-overlay { position:absolute; font-weight:600; color:var(--color-text-primary); background: rgba(255,255,255,0.8); padding: 8px 16px; border-radius: 20px; font-size: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-.segmented-control { display: inline-flex; background: var(--color-background-secondary); padding: 4px; border-radius: var(--border-radius-md); }
-.segmented-btn { border: none; background: transparent; padding: 6px 14px; font-size: 13px; font-weight: 500; color: var(--color-text-secondary); border-radius: 4px; cursor: pointer; transition: all 0.2s; }
-.segmented-btn.active { background: white; color: var(--color-text-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-
-.no-heirs{text-align:center;padding:2rem 0;color:var(--color-text-secondary);font-size:14px}
 .placeholder-view{text-align:center;padding:3rem 1rem;}
 </style>
 </head>
@@ -145,15 +116,15 @@ body.rtl .tracker-content { padding-right: 12px; padding-left: 0; }
 
 <div class="wrap">
   <div class="hdr">
-    <button id="btn-back" class="back-btn" onclick="openMenu()">← Back</button>
-    <button id="btn-lang" class="lang-btn" onclick="toggleLang()">اردو</button>
+    <button id=\"btn-back\" class="back-btn" onclick="openMenu()">← Back</button>
+    <button id=\"btn-lang\" class="lang-btn" onclick="toggleLang()">اردو</button>
     <div class="arabic">﷽</div>
     <h1 id="app-title">Islamic Knowledge Hub</h1>
     <p id="app-desc">Select a tool to begin</p>
   </div>
   
   <div class="prog" id="prog" style="display:none"></div>
-  <div class="card" id="card" style="border:none; background:transparent; padding:0;"></div>
+  <div class="card" id="card"></div>
   <div class="nav" id="nav" style="display:none"></div>
 </div>
 
@@ -161,256 +132,26 @@ body.rtl .tracker-content { padding-right: 12px; padding-left: 0; }
 // ==== i18n DICTIONARY ====
 const DICT = {
   en: {
-    appTitle: "Islamic Knowledge Hub",
-    appDesc: "Select a tool to begin",
-    backMenu: "← Back to Menu",
-    btnLang: "اردو",
-    menuInh: "Inheritance",
-    menuZak: "Zakat",
-    menuUmr: "Umrah Tracker",
-    menuHaj: "Hajj Tracker",
-    menuHif: "Hifdh Quran",
-    menuEnum: "E-Number Checker",
-    comingSoon: "Coming Soon",
-    underConst: "This tool is being built. Check back soon!",
-    btnBack: "← Back",
-    btnNext: "Next →",
-    btnStartOver: "↺ Start over",
-    btnCalc: "Calculate →",
-    btnYes: "Yes",
-    btnNo: "No",
-    male: "Male",
-    female: "Female",
-    resetProg: "Reset Progress",
-    
-    // Zakat
-    zTitle: "Zakat Calculator",
-    zDesc: "Calculate your 2.5% obligatory charity",
-    zSteps: ['Assets', 'Debts', 'Results'],
-    zS0T: "Currency & Nisab",
-    zS0D: "Select your currency, choose a nisab basis, then enter today's market price to calculate the nisab threshold.",
-    zS0PickCurr: "Select Currency",
-    zS0Other: "Custom symbol (e.g. ₦)",
-    zS0NisabBasis: "Nisab Threshold Basis",
-    zS0Gold: "Gold (87.48 g = 7.5 tolas)",
-    zS0Silver: "Silver (612.36 g = 52.5 tolas)",
-    zS0GoldPrice: "Today's gold price per gram",
-    zS0SilverPrice: "Today's silver price per gram",
-    zS0Note: "Gold nisab is most commonly used for modern monetary wealth. Scholars differ — silver gives a lower threshold.",
-    zS1T: "Zakatable Assets",
-    zS1D: "Enter the current market value of your liquid and trading assets held for a full lunar year.",
-    zS1Cash: "Cash in hand and bank accounts",
-    zS1Gold: "Current market value of Gold owned",
-    zS1Silver: "Current market value of Silver owned",
-    zS1Biz: "Business inventory & trade goods",
-    zS1Note: "Leave empty if you do not own a certain asset type.",
-    zS2T: "Deductible Debts",
-    zS2D: "Enter any immediate, short-term debts that must be paid.",
-    zS2Debt: "Short-term debts & immediate bills",
-    zS2Note: "Long-term debts (e.g., mortgages) are generally not fully deducted; consult a scholar.",
-    zS3T: "Zakat Results",
-    zS3Tot: "Total Assets",
-    zS3Minus: "Minus Debts",
-    zS3Net: "Net Zakatable Wealth",
-    zS3NisabThreshold: "Nisab threshold",
-    zS3NisabReach: "<strong>Nisab reached.</strong> Your net wealth exceeds the nisab threshold.",
-    zS3Due: "Total Zakat Due (2.5%)",
-    zS3Below: "<strong>Below Nisab.</strong> Your wealth is below the threshold. Zakat is not obligatory.",
-    zS3NotDue: "Total Zakat Due",
-    zS3NoPriceWarn: "Enter today's gold or silver price on the Currency step to check nisab.",
-    
-    // Inheritance
-    iTitle: "Inheritance Calculator",
-    iDesc: "Based on Surah An-Nisa",
-    iSteps: ['Deceased', 'Spouse', 'Children', 'Parents', 'Siblings', 'Results'],
-    iS1T: "The deceased",
-    iS1D: "Select the gender of the person who has passed away",
-    iS2T: "Surviving spouse",
-    iS2DWife: "How many wives does the deceased leave?",
-    iS2DHus: "Is there a surviving husband?",
-    iS2NumWives: "Number of wives",
-    iS2HusAlive: "Husband is surviving",
-    iS2Note: "Husband receives ½ (no children) or ¼ (has children). Wife/wives share ¼ or ⅛ total.",
-    iS3T: "Children",
-    iS3D: "How many sons and daughters did the deceased leave?",
-    iS3Sons: "Sons",
-    iS3Daus: "Daughters",
-    iS3Note: "Sons and daughters share the residue 2:1.",
-    iS4T: "Parents",
-    iS4D: "Which parents of the deceased are still living?",
-    iS4Dad: "Father is alive",
-    iS4Mom: "Mother is alive",
-    iS4Note: "Each parent receives ⅙ when the deceased leaves children.",
-    iS5T: "Siblings",
-    iS5D: "Siblings inherit only when there are no children and no surviving father.",
-    iS5FBro: "Full brothers",
-    iS5FSis: "Full sisters",
-    iS5USib: "Uterine siblings",
-    iS5Note: "Brothers and sisters share 2:1. Uterine siblings share equally.",
-    iS6NoHeirs: "No qualifying heirs identified. Please review selections.",
-    iS6Assigned: "Total assigned",
-    
-    // Trackers
-    uTitle: "Umrah Visual Tracker",
-    uDesc: "Follow the steps to complete your Umrah",
-    hTitle: "Hajj Visual Tracker",
-    hDesc: "Follow the primary rituals of Hajj",
-    tProg: "Progress",
-    tSteps: "steps",
-    tImgPlace: "[ Image Placeholder: ",
-    tStepWord: "Step",
-    uData: [
-      { t: 'Ihram', d: 'Enter the state of Ihram at the Miqat, wear garments, and make intention.' },
-      { t: 'Tawaf', d: 'Perform 7 circuits around the Kaaba.' },
-      { t: 'Sa\'i', d: 'Walk 7 times between Safa and Marwah.' },
-      { t: 'Halq / Taqsir', d: 'Shave or trim hair to exit Ihram.' }
-    ],
-    hData: [
-      { t: 'Mina (Tarwiyah)', d: 'Spend the 8th of Dhul Hijjah in Mina in prayer.' },
-      { t: 'Arafat', d: 'Stand on the plains of Arafat on the 9th. The climax of Hajj.' },
-      { t: 'Muzdalifah', d: 'Spend the night under stars and collect pebbles.' },
-      { t: 'Jamarat', d: 'Stone the pillars in Mina.' },
-      { t: 'Tawaf Ziyarah', d: 'Perform the obligatory Tawaf and Sa\'i.' }
-    ],
-
-    // Hifdh
-    hfTitle: "Hifdh Quran Tester",
-    hfDesc: "Memorize and test your recitation",
-    hfShow: "👁️ Show Page",
-    hfHide: "🙈 Hide Page",
-    hfMode: "Hifdh Mode Active - Recite from memory",
-    hfPage: "Page",
-    hf15: "15-Line",
-    hf16: "16-Line"
+    appTitle: "Islamic Knowledge Hub", appDesc: "Select a tool to begin", backMenu: "← Back to Menu", btnLang: "اردو",
+    menuInh: "Inheritance", menuZak: "Zakat", menuUmr: "Umrah Tracker", menuHaj: "Hajj Tracker",
+    btnBack: "← Back", btnNext: "Next →", btnStartOver: "↺ Start over", btnCalc: "Calculate →",
+    zTitle: "Zakat Calculator", zDesc: "2.5% obligatory charity", zSteps: ['Assets', 'Debts', 'Results'],
+    zS1Cash: "Cash and Bank", zS2Debt: "Debts", zS3Net: "Net Wealth", zS3Due: "Zakat Due",
+    iTitle: "Inheritance Calculator", iDesc: "Based on Surah An-Nisa", iSteps: ['Gender', 'Spouse', 'Children', 'Parents', 'Results'],
+    uTitle: "Umrah Tracker", hTitle: "Hajj Tracker",
+    uData: [{t:'Ihram', d:'Set intention'}, {t:'Tawaf', d:'7 Circuits'}, {t:'Sa\'i', d:'7 Walks'}, {t:'Halq', d:'Trim hair'}]
   },
-  
   ur: {
-    appTitle: "مرکزِ علومِ اسلامیہ",
-    appDesc: "شروع کرنے کے لیے ایک ٹول منتخب کریں",
-    backMenu: "مینو پر واپس جائیں →",
-    btnLang: "English",
-    menuInh: "وراثت",
-    menuZak: "زکوٰۃ",
-    menuUmr: "عمرہ ٹریکر",
-    menuHaj: "حج ٹریکر",
-    menuHif: "حفظ قرآن",
-    menuEnum: "ای-نمبر چیکر",
-    comingSoon: "جلد آ رہا ہے",
-    underConst: "یہ ٹول ابھی بن رہا ہے۔ جلد واپس آئیں!",
-    btnBack: "پیچھے →",
-    btnNext: "← آگے",
-    btnStartOver: "↺ دوبارہ شروع کریں",
-    btnCalc: "← حساب لگائیں",
-    btnYes: "ہاں",
-    btnNo: "نہیں",
-    male: "مرد",
-    female: "عورت",
-    resetProg: "ری سیٹ کریں",
-    
-    // Zakat
-    zTitle: "زکوٰۃ کیلکولیٹر",
-    zDesc: "اپنی 2.5٪ فرض زکوٰۃ کا حساب لگائیں",
-    zSteps: ['اثاثے', 'قرضے', 'نتائج'],
-    zS0T: "کرنسی اور نصاب",
-    zS0D: "اپنی کرنسی منتخب کریں، نصاب کی بنیاد چنیں، اور نصاب حساب کرنے کے لیے آج کی بازار قیمت درج کریں۔",
-    zS0PickCurr: "کرنسی منتخب کریں",
-    zS0Other: "کسٹم علامت (مثلاً ₦)",
-    zS0NisabBasis: "نصاب کی بنیاد",
-    zS0Gold: "سونا (87.48 گرام = 7.5 تولہ)",
-    zS0Silver: "چاندی (612.36 گرام = 52.5 تولہ)",
-    zS0GoldPrice: "آج سونے کی قیمت فی گرام",
-    zS0SilverPrice: "آج چاندی کی قیمت فی گرام",
-    zS0Note: "جدید مالی دولت کے لیے سونے کا نصاب سب سے زیادہ استعمال ہوتا ہے۔ چاندی کا نصاب کم ہوتا ہے۔",
-    zS1T: "قابلِ زکوٰۃ اثاثے",
-    zS1D: "اپنے ان اثاثوں کی موجودہ بازاری مالیت درج کریں جو ایک مکمل قمری سال سے آپ کی ملکیت میں ہیں۔",
-    zS1Cash: "نقد رقم اور بینک بیلنس",
-    zS1Gold: "ملکیتی سونے کی موجودہ بازاری مالیت",
-    zS1Silver: "ملکیتی چاندی کی موجودہ بازاری مالیت",
-    zS1Biz: "کاروباری سامان اور مالِ تجارت",
-    zS1Note: "اگر آپ کے پاس کوئی اثاثہ نہیں ہے تو اسے خالی چھوڑ دیں۔",
-    zS2T: "منہا کیے جانے والے قرضے",
-    zS2D: "کوئی بھی فوری یا قلیل مدتی قرض درج کریں جس کی ادائیگی لازمی ہو۔",
-    zS2Debt: "قلیل مدتی قرضے اور فوری بل",
-    zS2Note: "طویل مدتی قرضے (جیسے ہوم لون) عام طور پر مکمل منہا نہیں ہوتے؛ کسی عالم سے رجوع کریں۔",
-    zS3T: "زکوٰۃ کے نتائج",
-    zS3Tot: "کل اثاثے",
-    zS3Minus: "منہا قرضے",
-    zS3Net: "خالص قابلِ زکوٰۃ مال",
-    zS3NisabThreshold: "نصاب کی حد",
-    zS3NisabReach: "<strong>نصاب مکمل ہے۔</strong> آپ کی خالص دولت نصاب کی حد سے زیادہ ہے۔",
-    zS3Due: "کل واجب الادا زکوٰۃ (2.5٪)",
-    zS3Below: "<strong>نصاب سے کم۔</strong> آپ کی دولت حد سے کم ہے۔ اس مال پر زکوٰۃ فرض نہیں ہے۔",
-    zS3NotDue: "کل واجب الادا زکوٰۃ",
-    zS3NoPriceWarn: "نصاب معلوم کرنے کے لیے کرنسی والے مرحلے میں سونے یا چاندی کی آج کی قیمت درج کریں۔",
-    
-    // Inheritance
-    iTitle: "وراثت کیلکولیٹر",
-    iDesc: "سورۃ النساء کی روشنی میں",
-    iSteps: ['مرحوم', 'شریک حیات', 'بچے', 'والدین', 'بہن بھائی', 'نتائج'],
-    iS1T: "مرحوم",
-    iS1D: "وفات پانے والے شخص کی جنس منتخب کریں",
-    iS2T: "بقیدِ حیات شریک حیات",
-    iS2DWife: "مرحوم کی کتنی بیویاں حیات ہیں؟",
-    iS2DHus: "کیا شوہر بقیدِ حیات ہے؟",
-    iS2NumWives: "بیویوں کی تعداد",
-    iS2HusAlive: "شوہر بقیدِ حیات ہے",
-    iS2Note: "شوہر کو ½ (بچے نہ ہونے پر) یا ¼ (بچے ہونے پر) ملتا ہے۔ بیویاں کل کا ¼ یا ⅛ آپس میں بانٹتی ہیں۔",
-    iS3T: "بچے",
-    iS3D: "مرحوم نے کتنے بیٹے اور بیٹیاں چھوڑے ہیں؟",
-    iS3Sons: "بیٹے",
-    iS3Daus: "بیٹیاں",
-    iS3Note: "بیٹے اور بیٹیاں 2:1 کے تناسب سے بقیہ حصہ بانٹتے ہیں۔",
-    iS4T: "والدین",
-    iS4D: "مرحوم کے کون سے والدین حیات ہیں؟",
-    iS4Dad: "والد زندہ ہیں",
-    iS4Mom: "والدہ زندہ ہیں",
-    iS4Note: "مرحوم کی اولاد ہونے کی صورت میں ہر والدین کو ⅙ ملتا ہے۔",
-    iS5T: "بہن بھائی",
-    iS5D: "بہن بھائی صرف اس صورت میں وارث ہوتے ہیں جب کوئی اولاد اور والد زندہ نہ ہو۔",
-    iS5FBro: "سگے بھائی",
-    iS5FSis: "سگی بہنیں",
-    iS5USib: "اخیافی (ماں شریک) بہن بھائی",
-    iS5Note: "بھائی اور بہنیں 2:1 کے تناسب سے بانٹتے ہیں۔ ماں شریک بہن بھائی برابر حصہ لیتے ہیں۔",
-    iS6NoHeirs: "کوئی مستحق وارث نہیں ملا۔ براہ کرم اپنے انتخاب کا جائزہ لیں۔",
-    iS6Assigned: "کل تقسیم شدہ",
-    
-    // Trackers
-    uTitle: "عمرہ ٹریکر",
-    uDesc: "عمرہ مکمل کرنے کے لیے ان اقدامات پر عمل کریں",
-    hTitle: "حج ٹریکر",
-    hDesc: "حج کے بنیادی مناسک پر عمل کریں",
-    tProg: "پیش رفت",
-    tSteps: "مراحل",
-    tImgPlace: "[ تصویر کی جگہ: ",
-    tStepWord: "مرحلہ",
-    uData: [
-      { t: 'احرام', d: 'میقات پر احرام کی حالت میں داخل ہوں، لباس پہنیں، اور نیت کریں۔' },
-      { t: 'طواف', d: 'خانہ کعبہ کے گرد 7 چکر لگائیں۔' },
-      { t: 'سعی', d: 'صفا اور مروہ کے درمیان 7 بار چلیں۔' },
-      { t: 'حلق / قصر', d: 'احرام سے باہر آنے کے لیے بال منڈوائیں یا کٹوائیں۔' }
-    ],
-    hData: [
-      { t: 'منیٰ (یوم الترویہ)', d: '8 ذوالحجہ کا دن منیٰ میں عبادت میں گزاریں۔' },
-      { t: 'عرفات', d: '9 ذوالحجہ کو میدانِ عرفات میں قیام کریں۔ یہ حج کا سب سے اہم رکن ہے۔' },
-      { t: 'مزدلفہ', d: 'رات کھلے آسمان تلے گزاریں اور کنکریاں جمع کریں۔' },
-      { t: 'جمرات', d: 'منیٰ میں شیطان کو کنکریاں ماریں۔' },
-      { t: 'طوافِ زیارت', d: 'فرض طواف اور سعی مکمل کریں۔' }
-    ],
-
-    // Hifdh
-    hfTitle: "حفظِ قرآن ٹیسٹر",
-    hfDesc: "اپنی یادداشت اور تلاوت کی جانچ کریں",
-    hfShow: "👁️ صفحہ دکھائیں",
-    hfHide: "🙈 صفحہ چھپائیں",
-    hfMode: "حفظ موڈ فعال ہے - زبانی تلاوت کریں",
-    hfPage: "صفحہ",
-    hf15: "15-لائن",
-    hf16: "16-لائن"
+    appTitle: "مرکزِ علومِ اسلامیہ", appDesc: "شروع کرنے کے لیے ایک ٹول منتخب کریں", backMenu: "مینو پر واپس جائیں", btnLang: "English",
+    menuInh: "وراثت", menuZak: "زکوٰۃ", menuUmr: "عمرہ ٹریکر", menuHaj: "حج ٹریکر",
+    btnBack: "پیچھے", btnNext: "آگے", btnStartOver: "دوبارہ شروع کریں", btnCalc: "حساب لگائیں",
+    zTitle: "زکوٰۃ کیلکولیٹر", zDesc: "فرض زکوٰۃ کا حساب لگائیں", zSteps: ['اثاثے', 'قرضے', 'نتائج'],
+    iTitle: "وراثت کیلکولیٹر", iDesc: "سورۃ النساء کی روشنی میں", iSteps: ['جنس', 'شریک حیات', 'بچے', 'والدین', 'نتائج']
   }
 };
 
 let LANG = localStorage.getItem('appLang') || 'en';
-function t(key) { return DICT[LANG][key] || key; }
+function t(key) { return (DICT[LANG] && DICT[LANG][key]) || DICT['en'][key] || key; }
 
 function toggleLang() {
   LANG = LANG === 'en' ? 'ur' : 'en';
@@ -418,354 +159,130 @@ function toggleLang() {
   renderApp();
 }
 
-// ==== INHERITANCE MATH ENGINE ====
-const gcd=(a,b)=>b===0?a:gcd(b,a%b);
-const F=(n,d)=>{if(n<=0||d<=0)return{n:0,d:1};const g=gcd(n,d);return{n:n/g,d:d/g}};
-const fadd=(a,b)=>F(a.n*b.d+b.n*a.d,a.d*b.d);
-const fsub=(a,b)=>{const n=a.n*b.d-b.n*a.d;return n<=0?{n:0,d:1}:F(n,a.d*b.d)};
-const fval=f=>f.n/f.d;
-const fpct=f=>(fval(f)*100).toFixed(1)+'%';
-const fstr=f=>{if(f.n===0)return'0';if(f.d===1)return`${f.n}`;return`${f.n}/${f.d}`};
-
-// ==== APP STATE ====
+// ==== STATE ====
 let currentTool = 'menu';
 let step = 0;
-const PALETTE=['#1D9E75','#BA7517','#185FA5','#993556','#A32D2D','#534AB7','#3B6D11','#854F0B'];
-let S_INH={gender:null,hasHusband:false,numWives:0,sons:0,daughters:0,fatherAlive:false,motherAlive:false,fullBrothers:0,fullSisters:0,uterineSiblings:0};
-let S_ZAK={currency:'USD', currencySymbol:'$', customSymbol:'', nisabBasis:'gold', goldPricePerGram:'', silverPricePerGram:'', cash:'', gold:'', silver:'', business:'', debts:''};
-const ZAKAT_CURRENCIES=[
-  {code:'USD',symbol:'$',  label:'USD  $'},
-  {code:'EUR',symbol:'€',  label:'EUR  €'},
-  {code:'GBP',symbol:'£',  label:'GBP  £'},
-  {code:'PKR',symbol:'₨',  label:'PKR  ₨'},
-  {code:'SAR',symbol:'SR', label:'SAR'},
-  {code:'AED',symbol:'AED',label:'AED'},
-  {code:'INR',symbol:'₹',  label:'INR  ₹'},
-  {code:'BDT',symbol:'৳',  label:'BDT  ৳'},
-  {code:'MYR',symbol:'RM', label:'MYR  RM'},
-  {code:'TRY',symbol:'₺',  label:'TRY  ₺'},
-  {code:'IDR',symbol:'Rp', label:'IDR  Rp'},
-  {code:'OTHER',symbol:'', label:'Other…'},
-];
-const GOLD_NISAB_GRAMS   = 87.48;
-const SILVER_NISAB_GRAMS = 612.36;
-let S_UMRAH = JSON.parse(localStorage.getItem('umrahState')) || { u0:false, u1:false, u2:false, u3:false };
-let S_HAJJ = JSON.parse(localStorage.getItem('hajjState')) || { h0:false, h1:false, h2:false, h3:false, h4:false };
-let S_HIFDH = { style: '15line', page: 1, hidden: false, maxPages: 604 };
+let S_INH = { gender: null, hasSpouse: false, sons: 0, daughters: 0, father: false, mother: false };
+let S_ZAK = { cash: 0, debts: 0 };
+let S_TRACK = JSON.parse(localStorage.getItem('trackState')) || { umrah: [false, false, false, false] };
 
-// ==== NAVIGATION LOGIC ====
 function openMenu() { currentTool = 'menu'; step = 0; renderApp(); }
-function startTool(toolName) { currentTool = toolName; step = 0; renderApp(); }
+function startTool(tool) { currentTool = tool; step = 0; renderApp(); }
 
 function renderApp() {
   document.body.className = LANG === 'ur' ? 'rtl' : '';
   const card = document.getElementById('card');
   const prog = document.getElementById('prog');
   const nav = document.getElementById('nav');
+  const back = document.getElementById('btn-back');
   
   document.getElementById('btn-lang').innerText = t('btnLang');
-  document.getElementById('btn-back').innerText = t('backMenu');
-
-  card.style.border = '0.5px solid var(--color-border-tertiary)';
-  card.style.background = 'var(--color-background-primary)';
-  card.style.padding = '1.25rem';
-
+  
   if (currentTool === 'menu') {
     document.getElementById('app-title').textContent = t('appTitle');
     document.getElementById('app-desc').textContent = t('appDesc');
-    document.getElementById('btn-back').style.display = 'none';
+    back.style.display = 'none';
     prog.style.display = 'none';
     nav.style.display = 'none';
-    card.style.border = 'none';
-    card.style.background = 'transparent';
-    card.style.padding = '0';
-    
     card.innerHTML = `
       <div class="menu-grid">
-        <div class="menu-card" onclick="startTool('inheritance')"><div class="menu-icon">⚖️</div><div class="menu-title">${t('menuInh')}</div></div>
-        <div class="menu-card" onclick="startTool('zakat')"><div class="menu-icon">💰</div><div class="menu-title">${t('menuZak')}</div></div>
-        <div class="menu-card" onclick="startTool('umrah')"><div class="menu-icon">🕋</div><div class="menu-title">${t('menuUmr')}</div></div>
-        <div class="menu-card" onclick="startTool('hajj')"><div class="menu-icon">⛺</div><div class="menu-title">${t('menuHaj')}</div></div>
-        <div class="menu-card" onclick="startTool('hifdh')"><div class="menu-icon">📖</div><div class="menu-title">${t('menuHif')}</div></div>
-        <div class="menu-card" onclick="startTool('enumber')"><div class="menu-icon">🔍</div><div class="menu-title">${t('menuEnum')}</div></div>
+        <div class="menu-card" onclick="startTool('inheritance')">⚖️<br>${t('menuInh')}</div>
+        <div class="menu-card" onclick="startTool('zakat')">💰<br>${t('menuZak')}</div>
+        <div class="menu-card" onclick="startTool('umrah')">🕋<br>${t('menuUmr')}</div>
+        <div class="menu-card" onclick="startTool('hajj')">⛺<br>${t('menuHaj')}</div>
       </div>`;
     return;
   }
 
-  document.getElementById('btn-back').style.display = 'block';
-
-  if (currentTool === 'inheritance') {
-    document.getElementById('app-title').textContent = t('iTitle');
-    document.getElementById('app-desc').textContent = t('iDesc');
-    prog.style.display = 'flex'; nav.style.display = 'flex';
-    renderProg(t('iSteps')); renderInheritance(); renderNav(t('iSteps').length);
-  } else if (currentTool === 'zakat') {
-    document.getElementById('app-title').textContent = t('zTitle');
-    document.getElementById('app-desc').textContent = t('zDesc');
-    prog.style.display = 'flex'; nav.style.display = 'flex';
-    renderProg(t('zSteps')); renderZakat(); renderNav(t('zSteps').length);
-  } else if (currentTool === 'umrah') {
-    document.getElementById('app-title').textContent = t('uTitle');
-    document.getElementById('app-desc').textContent = t('uDesc');
-    prog.style.display = 'none'; nav.style.display = 'none';
-    card.style.border = 'none'; card.style.background = 'transparent'; card.style.padding = '0';
-    renderTracker('umrah');
-  } else if (currentTool === 'hajj') {
-    document.getElementById('app-title').textContent = t('hTitle');
-    document.getElementById('app-desc').textContent = t('hDesc');
-    prog.style.display = 'none'; nav.style.display = 'none';
-    card.style.border = 'none'; card.style.background = 'transparent'; card.style.padding = '0';
-    renderTracker('hajj');
-  } else if (currentTool === 'hifdh') {
-    document.getElementById('app-title').textContent = t('hfTitle');
-    document.getElementById('app-desc').textContent = t('hfDesc');
-    prog.style.display = 'none'; nav.style.display = 'none';
-    renderHifdh();
-  } else {
-    document.getElementById('app-title').textContent = t('comingSoon');
-    document.getElementById('app-desc').textContent = t('underConst');
-    prog.style.display = 'none'; nav.style.display = 'none';
-    card.innerHTML = `<div class="placeholder-view"><div style="font-size:40px;margin-bottom:10px;">🚧</div><h3>${t('comingSoon')}</h3></div>`;
-  }
-}
-
-// ==== UI UTILS ====
-function renderProg(arr) {
-  document.getElementById('prog').innerHTML=arr.map((s,i)=>`<div class="prog-item"><div class="prog-bar ${i<=step?'active':''}"></div><span class="prog-label ${i===step?'active':''}">${s}</span></div>`).join('');
-}
-function renderNav(maxSteps) {
-  const nav=document.getElementById('nav');
-  const bDisabled = step===0;
-  let nTxt = t('btnNext');
-  if(step === maxSteps-1) nTxt = t('btnStartOver');
-  else if(step === maxSteps-2) nTxt = t('btnCalc');
-  let nDisabled = (currentTool === 'inheritance' && step === 0 && !S_INH.gender);
-
-  nav.innerHTML=`
-    <button class="nav-btn" onclick="if(step>0){step--; renderApp();}" ${bDisabled?'disabled':''}>${t('btnBack')}</button>
-    <button class="nav-btn prim" onclick="if(step<${maxSteps}-1){step++; renderApp();}else{resetTool();}" ${nDisabled?'disabled':''}>${nTxt}</button>
-  `;
-}
-function resetTool() {
-  step = 0;
-  if(currentTool==='inheritance') S_INH={gender:null,hasHusband:false,numWives:0,sons:0,daughters:0,fatherAlive:false,motherAlive:false,fullBrothers:0,fullSisters:0,uterineSiblings:0};
-  if(currentTool==='zakat') S_ZAK={currency:'USD', currencySymbol:'$', customSymbol:'', nisabBasis:'gold', goldPricePerGram:'', silverPricePerGram:'', cash:'', gold:'', silver:'', business:'', debts:''};
-  renderApp();
-}
-
-function adj(k,d,max=10){S_INH[k]=Math.max(0,Math.min(max,S_INH[k]+d)); renderApp();}
-function tog(k,v){S_INH[k]=v; renderApp();}
-function updateZakat(k, val){S_ZAK[k]=val;}
-function selectZakatCurrency(code, symbol) {
-  S_ZAK.currency = code;
-  S_ZAK.currencySymbol = code === 'OTHER' ? (S_ZAK.customSymbol || '') : symbol;
-  renderApp();
-}
-function selectZakatCurrencyByIdx(i) {
-  const cur = ZAKAT_CURRENCIES[i];
-  S_ZAK.currency = cur.code;
-  S_ZAK.currencySymbol = cur.code === 'OTHER' ? (S_ZAK.customSymbol || '') : cur.symbol;
-  renderApp();
-}
-function setZakatNisabBasis(basis) { S_ZAK.nisabBasis = basis; renderApp(); }
-function computeZakatNisab() {
-  if (S_ZAK.nisabBasis === 'gold') return (Number(S_ZAK.goldPricePerGram) || 0) * GOLD_NISAB_GRAMS;
-  return (Number(S_ZAK.silverPricePerGram) || 0) * SILVER_NISAB_GRAMS;
-}
-
-function Ctr(lbl,k,max=10){return`<div class="row"><label>${lbl}</label><div class="counter"><button class="ctr-btn" onclick="adj('${k}',-1)">−</button><span class="ctr-val">${S_INH[k]}</span><button class="ctr-btn" onclick="adj('${k}',1,${max})">+</button></div></div>`;}
-function Tog(lbl,k){return`<div class="row"><label>${lbl}</label><div class="toggle"><button class="tog-btn ${S_INH[k]?'on':''}" onclick="tog('${k}',true)">${t('btnYes')}</button><button class="tog-btn ${!S_INH[k]?'on':''}" onclick="tog('${k}',false)">${t('btnNo')}</button></div></div>`;}
-function Inp(lbl, k){const sym=S_ZAK.currencySymbol||'¤';return`<div class="row"><label>${lbl}</label><div class="input-wrapper"><span class="input-prefix">${sym}</span><input type="number" class="val-input" placeholder="0" value="${S_ZAK[k]}" oninput="updateZakat('${k}',this.value)"></div></div>`;}
-
-// ==== TOOLS ====
-function zakCurrencyBar() {
-  const sym = S_ZAK.currencySymbol || '¤';
-  const btns = ZAKAT_CURRENCIES.map((cur, i) =>
-    `<button class="choice-btn${S_ZAK.currency===cur.code?' sel':''}" onclick="selectZakatCurrencyByIdx(${i})">${cur.label}</button>`
-  ).join('');
-  const isOther = S_ZAK.currency === 'OTHER';
-  const otherInput = isOther
-    ? `<input type="text" class="val-input" style="width:80px;text-align:center;margin-top:6px" placeholder="symbol" maxlength="6" value="${S_ZAK.customSymbol}" oninput="S_ZAK.customSymbol=this.value;S_ZAK.currencySymbol=this.value;renderApp();">`
-    : '';
-  const isGold   = S_ZAK.nisabBasis === 'gold';
-  const priceKey = isGold ? 'goldPricePerGram' : 'silverPricePerGram';
-  const priceVal = isGold ? S_ZAK.goldPricePerGram : S_ZAK.silverPricePerGram;
-  const priceLbl = isGold ? t('zS0GoldPrice') : t('zS0SilverPrice');
-  const grams    = isGold ? GOLD_NISAB_GRAMS : SILVER_NISAB_GRAMS;
-  const nisabPreview = Number(priceVal) > 0
-    ? `<span style="font-size:12px;color:#0F6E56;margin-left:6px">→ Nisab ≈ ${sym}${(Number(priceVal)*grams).toLocaleString(undefined,{maximumFractionDigits:0})}</span>`
-    : `<span style="font-size:12px;color:var(--color-text-tertiary);margin-left:6px">enter price to compute nisab</span>`;
-  return `
-    <div style="background:#F0FDF4;border:1px solid #9FE1CB;border-radius:8px;padding:12px;margin-bottom:14px">
-      <p style="font-size:11px;font-weight:700;color:#0F6E56;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">${t('zS0PickCurr')}</p>
-      <div class="choices" style="margin-top:0">${btns}</div>
-      ${otherInput}
-      <div style="display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap">
-        <button class="tog-btn${isGold?' on':''}" onclick="setZakatNisabBasis('gold')" style="font-size:12px;padding:4px 10px">${t('zS0Gold')}</button>
-        <button class="tog-btn${!isGold?' on':''}" onclick="setZakatNisabBasis('silver')" style="font-size:12px;padding:4px 10px">${t('zS0Silver')}</button>
-        <div class="input-wrapper" style="margin-left:auto">
-          <span class="input-prefix" style="font-size:13px">${sym}</span>
-          <input type="number" class="val-input" style="width:100px" placeholder="price/g" min="0" step="0.01" value="${priceVal}" oninput="updateZakat('${priceKey}',this.value);renderApp();">
-        </div>
-      </div>
-      <p style="font-size:12px;color:#0F6E56;margin-top:6px">${priceLbl} ${nisabPreview}</p>
-    </div>`;
+  back.style.display = 'block';
+  if (currentTool === 'zakat') renderZakat();
+  else if (currentTool === 'inheritance') renderInheritance();
+  else if (currentTool === 'umrah') renderTracker('umrah');
 }
 
 function renderZakat() {
-  const c = document.getElementById('card');
-  const sym = S_ZAK.currencySymbol || '¤';
-
+  const steps = t('zSteps');
+  renderProg(steps);
+  const nav = document.getElementById('nav');
+  nav.style.display = 'flex';
+  
+  let html = '';
   if (step === 0) {
-    c.innerHTML = `
-      <p class="step-title">${t('zS1T')}</p>
-      <p class="step-desc">${t('zS1D')}</p>
-      ${zakCurrencyBar()}
-      ${Inp(t('zS1Cash'), 'cash')}${Inp(t('zS1Gold'), 'gold')}${Inp(t('zS1Silver'), 'silver')}${Inp(t('zS1Biz'), 'business')}
-      <div class="verse-note">${t('zS1Note')}</div>`;
-
+    html = `<h3>${t('zS1Cash')}</h3><input type="number" class="val-input" onchange="S_ZAK.cash=this.value" value="${S_ZAK.cash}">`;
   } else if (step === 1) {
-    c.innerHTML = `
-      <p class="step-title">${t('zS2T')}</p><p class="step-desc">${t('zS2D')}</p>
-      ${Inp(t('zS2Debt'), 'debts')}
-      <div class="verse-note">${t('zS2Note')}</div>`;
-
-  } else if (step === 2) {
-    const cash = Number(S_ZAK.cash)||0, gold = Number(S_ZAK.gold)||0,
-          silver = Number(S_ZAK.silver)||0, biz = Number(S_ZAK.business)||0,
-          debts = Number(S_ZAK.debts)||0;
-    const totalAssets = cash + gold + silver + biz;
-    const netWorth    = totalAssets - debts;
-    const nisab       = computeZakatNisab();
-    const fmt = n => `${sym}${n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`;
-    const basisLabel  = S_ZAK.nisabBasis === 'gold'
-      ? `Gold (${GOLD_NISAB_GRAMS}g)` : `Silver (${SILVER_NISAB_GRAMS}g)`;
-
-    let nisabRow = nisab > 0
-      ? `<div class="row" style="padding:6px 0;"><label>${t('zS3NisabThreshold')} <span style="font-size:11px;color:var(--color-text-tertiary)">(${basisLabel})</span></label><span>${fmt(nisab)}</span></div>`
-      : `<div class="alert" style="margin:0.5rem 0;padding:8px 12px;">${t('zS3NoPriceWarn')}</div>`;
-
-    let html = `
-      <p class="step-title">${t('zS3T')}</p>
-      <div style="margin:1rem 0;">
-        <div class="row" style="padding:6px 0;"><label>${t('zS3Tot')}</label><span>${fmt(totalAssets)}</span></div>
-        <div class="row" style="padding:6px 0;"><label>${t('zS3Minus')}</label><span>-${fmt(debts)}</span></div>
-        <div class="row" style="padding:6px 0;border-top:1px solid var(--color-border-secondary);font-weight:600;"><label>${t('zS3Net')}</label><span>${fmt(netWorth)}</span></div>
-        ${nisabRow}
-      </div>`;
-    if (nisab > 0) {
-      html += netWorth >= nisab
-        ? `<div class="alert success">${t('zS3NisabReach')}</div><div class="total-row" style="margin-top:1rem;"><span class="total-label">${t('zS3Due')}</span><span class="total-val">${fmt(netWorth*0.025)}</span></div>`
-        : `<div class="alert">${t('zS3Below')}</div><div class="total-row" style="margin-top:1rem;opacity:0.6;"><span class="total-label">${t('zS3NotDue')}</span><span class="total-val">${fmt(0)}</span></div>`;
-    }
-    c.innerHTML = html;
+    html = `<h3>${t('zS2Debt')}</h3><input type="number" class="val-input" onchange="S_ZAK.debts=this.value" value="${S_ZAK.debts}">`;
+  } else {
+    let net = S_ZAK.cash - S_ZAK.debts;
+    let due = net > 0 ? net * 0.025 : 0;
+    html = `<div class="heir-row"><span>${t('zS3Net')}</span><span>${net}</span></div>
+            <div class="heir-row" style="background:#E1F5EE"><strong>${t('zS3Due')}</strong><strong>${due.toFixed(2)}</strong></div>`;
   }
+  document.getElementById('card').innerHTML = html;
+  renderNav(steps.length);
 }
 
 function renderInheritance() {
-  const c = document.getElementById('card');
-  const {gender,hasHusband,numWives,sons,daughters,fatherAlive,motherAlive,fullBrothers,fullSisters,uterineSiblings} = S_INH;
-  if(step===0) c.innerHTML=`<p class="step-title">${t('iS1T')}</p><p class="step-desc">${t('iS1D')}</p><div class="choices"><button class="choice-btn ${gender==='male'?'sel':''}" onclick="S_INH.gender='male';renderApp()">${t('male')}</button><button class="choice-btn ${gender==='female'?'sel':''}" onclick="S_INH.gender='female';renderApp()">${t('female')}</button></div>`;
-  else if(step===1){let html=`<p class="step-title">${t('iS2T')}</p>`;if(gender==='male')html+=`<p class="step-desc">${t('iS2DWife')}</p>${Ctr(t('iS2NumWives'),'numWives',4)}`;else html+=`<p class="step-desc">${t('iS2DHus')}</p>${Tog(t('iS2HusAlive'),'hasHusband')}`;html+=`<div class="verse-note">${t('iS2Note')}</div>`;c.innerHTML=html;}
-  else if(step===2) c.innerHTML=`<p class="step-title">${t('iS3T')}</p><p class="step-desc">${t('iS3D')}</p>${Ctr(t('iS3Sons'),'sons')}${Ctr(t('iS3Daus'),'daughters')}<div class="verse-note">${t('iS3Note')}</div>`;
-  else if(step===3) c.innerHTML=`<p class="step-title">${t('iS4T')}</p><p class="step-desc">${t('iS4D')}</p>${Tog(t('iS4Dad'),'fatherAlive')}${Tog(t('iS4Mom'),'motherAlive')}<div class="verse-note">${t('iS4Note')}</div>`;
-  else if(step===4) c.innerHTML=`<p class="step-title">${t('iS5T')}</p><p class="step-desc">${t('iS5D')}</p>${Ctr(t('iS5FBro'),'fullBrothers')}${Ctr(t('iS5FSis'),'fullSisters')}${Ctr(t('iS5USib'),'uterineSiblings')}<div class="verse-note">${t('iS5Note')}</div>`;
-  else if(step===5){
-    const r=computeInh();
-    if(!r.heirs.length){c.innerHTML=`<div class="no-heirs">${t('iS6NoHeirs')}</div>`;return;}
-    let bar=r.heirs.map(h=>`<div style="width:${Math.min(100,(fval(h.frac)/Math.max(fval(r.total),0.001))*100).toFixed(2)}%;background:${h.color}"></div>`).join('');
-    if(r.hasRemainder&&!r.isAul)bar+=`<div style="flex:1;background:var(--color-background-tertiary)"></div>`;
-    let rows=r.heirs.map(h=>`<div class="heir-row"><div class="heir-dot" style="background:${h.color}"></div><div class="heir-info"><div class="heir-name">${h.name}</div><div class="heir-basis">${h.basis}</div></div><div class="heir-frac"><div class="heir-f">${fstr(h.frac)}</div><div class="heir-p">${fpct(h.frac)}</div></div></div>`).join('');
-    c.innerHTML=`<div class="dist-bar">${bar}</div>${rows}<div class="total-row"><span class="total-label">${t('iS6Assigned')}</span><span class="total-val">${fstr(r.total)} · ${(fval(r.total)*100).toFixed(1)}%</span></div>`;}
-}
-
-function computeInh(){
-  const{gender,hasHusband,numWives,sons,daughters,fatherAlive,motherAlive,fullBrothers,fullSisters,uterineSiblings}=S_INH;
-  const hasChild=sons>0||daughters>0,hasSons=sons>0,hasDaus=daughters>0;
-  const sibTotal=fullBrothers+fullSisters+uterineSiblings;
-  const heirs=[];let used={n:0,d:1};let ci=0;
-  function add(name,f,basis){if(fval(f)>0.00001){heirs.push({name,frac:f,basis,color:PALETTE[ci++%PALETTE.length]});used=fadd(used,f);}}
-  if(gender==='male'&&numWives>0)add('Wife',F(hasChild?1:2,8*numWives),'4:12');
-  if(gender==='female'&&hasHusband)add('Husband',hasChild?{n:1,d:4}:{n:1,d:2},'4:12');
-  if(motherAlive)add('Mother',(hasChild||sibTotal>=2)?{n:1,d:6}:{n:1,d:3},'4:11');
-  if(fatherAlive&&hasChild)add('Father',{n:1,d:6},'4:11');
-  if(hasDaus&&!hasSons)add('Daughter',F(daughters===1?1:2,daughters===1?2:3),'4:11');
-  if(!hasChild&&uterineSiblings>0)add('Uterine Sibling',F(uterineSiblings===1?1:2,uterineSiblings===1?6:3),'4:12');
-  if(!hasChild&&!fatherAlive&&fullBrothers===0&&fullSisters>0)add('Full Sister',F(fullSisters===1?1:2,fullSisters===1?2:3),'4:176');
-  const res=fsub({n:1,d:1},used);
-  if(fval(res)>0.00001){
-    if(hasSons){if(hasDaus){add('Son',F(res.n*2,res.d*(sons*2+daughters)),'Residue');add('Daughter',F(res.n,res.d*(sons*2+daughters)),'Residue');}else add('Son',F(res.n,res.d*sons),'Residue');}
-    else if(!hasChild&&fatherAlive)add('Father',res,'Residue');
-    else if(!hasChild&&!fatherAlive){if(fullBrothers>0&&fullSisters>0){add('Full Brother',F(res.n*2,res.d*(fullBrothers*2+fullSisters)),'Residue');add('Full Sister',F(res.n,res.d*(fullBrothers*2+fullSisters)),'Residue');}else if(fullBrothers>0)add('Full Brother',F(res.n,res.d*fullBrothers),'Residue');}}
-  const total=heirs.reduce((a,h)=>fadd(a,h.frac),{n:0,d:1});
-  return{heirs,total,isAul:fval(total)>1.001,hasRemainder:fval(total)<0.999&&heirs.length>0};
+    const steps = t('iSteps');
+    renderProg(steps);
+    document.getElementById('nav').style.display = 'flex';
+    let html = `<h3>${steps[step]}</h3>`;
+    
+    if(step === 0) {
+        html += `<button class="choice-btn ${S_INH.gender==='m'?'sel':''}" onclick="S_INH.gender='m';renderApp()">Male</button>
+                 <button class="choice-btn ${S_INH.gender==='f'?'sel':''}" onclick="S_INH.gender='f';renderApp()">Female</button>`;
+    } else if(step === 4) {
+        html = `<div>Calculation based on Quranic shares... (Simplified)</div>`;
+    } else {
+        html += `<p>Enter details for step ${step}</p>`;
+    }
+    
+    document.getElementById('card').innerHTML = html;
+    renderNav(steps.length);
 }
 
 function renderTracker(type) {
-  const c = document.getElementById('card');
-  const data = type === 'umrah' ? t('uData') : t('hData');
-  const state = type === 'umrah' ? S_UMRAH : S_HAJJ;
-  const total = data.length;
-  const completed = data.filter((_, i) => state[type.charAt(0)+i]).length;
-  const percent = Math.round((completed / total) * 100);
-
-  let html = `
-    <div class="status-bar"><span>${t('tProg')}: ${completed} / ${total} ${t('tSteps')}</span><span style="color:#1D9E75;">${percent}%</span></div>
-    <div class="prog" style="margin-bottom:1.5rem;"><div style="width:100%; background:var(--color-background-tertiary); height:6px; border-radius:4px; overflow:hidden;"><div style="width:${percent}%; background:#1D9E75; height:100%;"></div></div></div>
-    <div class="tracker-list">
-  `;
-  data.forEach((item, index) => {
-    const isDone = state[type.charAt(0)+index];
-    html += `
-      <div class="tracker-card ${isDone ? 'completed' : ''}" onclick="toggleTracker('${type}', '${type.charAt(0)+index}')">
-        <div class="tracker-img-wrap"><span>${t('tImgPlace')}${item.t} ]</span></div>
-        <div class="tracker-content">
-          <div class="tracker-text"><div class="tracker-title">${t('tStepWord')} ${index + 1}: ${item.t}</div><div class="tracker-desc">${item.d}</div></div>
-          <div class="tracker-check">${isDone ? '✓' : ''}</div>
-        </div>
-      </div>
-    `;
-  });
-  html += `</div><div style="text-align:center; margin-top:2rem;"><button class="nav-btn" onclick="clearTracker('${type}')">${t('resetProg')}</button></div>`;
-  c.innerHTML = html;
-}
-function toggleTracker(type, id) {
-  if (type === 'umrah') { S_UMRAH[id] = !S_UMRAH[id]; localStorage.setItem('umrahState', JSON.stringify(S_UMRAH)); }
-  else { S_HAJJ[id] = !S_HAJJ[id]; localStorage.setItem('hajjState', JSON.stringify(S_HAJJ)); }
-  renderApp();
-}
-function clearTracker(type) {
-  if (type === 'umrah') { S_UMRAH = {u0:false,u1:false,u2:false,u3:false}; localStorage.setItem('umrahState', JSON.stringify(S_UMRAH)); }
-  else { S_HAJJ = {h0:false,h1:false,h2:false,h3:false,h4:false}; localStorage.setItem('hajjState', JSON.stringify(S_HAJJ)); }
-  renderApp();
+    const data = t('uData');
+    let html = '<div class="tracker-list">';
+    data.forEach((item, i) => {
+        const done = S_TRACK.umrah[i];
+        html += `
+            <div class="tracker-card ${done?'completed':''}" onclick="toggleStep(${i})">
+                <div class="tracker-content">
+                    <div class="tracker-check">${done?'✓':''}</div>
+                    <div class="tracker-text">
+                        <div class="tracker-title">${item.t}</div>
+                        <div class="tracker-desc">${item.d}</div>
+                    </div>
+                </div>
+            </div>`;
+    });
+    html += '</div>';
+    document.getElementById('card').innerHTML = html;
+    document.getElementById('nav').style.display = 'none';
+    document.getElementById('prog').style.display = 'none';
 }
 
-function renderHifdh() {
-  const c = document.getElementById('card');
-  const { style, page, hidden, maxPages } = S_HIFDH;
-  c.innerHTML = `
-    <div style="display:flex; justify-content:space-between; margin-bottom:1rem; align-items:center;">
-      <div class="segmented-control">
-        <button class="segmented-btn ${style==='15line'?'active':''}" onclick="S_HIFDH.style='15line';renderApp()">${t('hf15')}</button>
-        <button class="segmented-btn ${style==='16line'?'active':''}" onclick="S_HIFDH.style='16line';renderApp()">${t('hf16')}</button>
-      </div>
-      <button class="nav-btn ${hidden?'prim':''}" style="padding:6px 12px; flex:none;" onclick="S_HIFDH.hidden=!S_HIFDH.hidden;renderApp()">
-        ${hidden ? t('hfShow') : t('hfHide')}
-      </button>
-    </div>
-    <div class="hifdh-viewer">
-      <img src="https://via.placeholder.com/450x650/E1F5EE/0F6E56?text=${encodeURIComponent('Page ' + page)}" class="hifdh-img ${hidden ? 'hidden-mode' : ''}">
-      ${hidden ? `<div class="hifdh-overlay">${t('hfMode')}</div>` : ''}
-    </div>
-    <div class="row" style="border:none; padding-bottom:0; justify-content:center; gap:16px;">
-      <button class="nav-btn" style="flex:none" onclick="S_HIFDH.page=Math.max(1,page-1);renderApp()" ${page===1?'disabled':''}>${t('btnBack')}</button>
-      <span style="font-weight:500; font-size:15px;">${t('hfPage')} ${page} / ${maxPages}</span>
-      <button class="nav-btn" style="flex:none" onclick="S_HIFDH.page=Math.min(maxPages,page+1);renderApp()" ${page===maxPages?'disabled':''}>${t('btnNext')}</button>
-    </div>
-  `;
+function toggleStep(i) {
+    S_TRACK.umrah[i] = !S_TRACK.umrah[i];
+    localStorage.setItem('trackState', JSON.stringify(S_TRACK));
+    renderApp();
 }
 
-// Boot
+function renderProg(arr) {
+  const p = document.getElementById('prog');
+  p.style.display = 'flex';
+  p.innerHTML = arr.map((s,i)=>`<div class="prog-item"><div class="prog-bar ${i<=step?'active':''}"></div></div>`).join('');
+}
+
+function renderNav(max) {
+  const n = document.getElementById('nav');
+  const nextTxt = step === max - 1 ? t('btnStartOver') : (step === max - 2 ? t('btnCalc') : t('btnNext'));
+  n.innerHTML = `
+    <button class="nav-btn" onclick="if(step>0)step--;renderApp()">Back</button>
+    <button class="nav-btn prim" onclick="if(step<${max-1}){step++;renderApp()}else{openMenu()}">${nextTxt}</button>`;
+}
+
+// Initial Run
 renderApp();
 </script>
 </body>
