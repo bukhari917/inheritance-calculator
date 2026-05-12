@@ -22,105 +22,56 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font-sans); background: #f9fafb; transition: all 0.2s;}
 
-/* RTL Support */
 body.rtl { font-family: var(--font-urdu); direction: rtl; text-align: right; }
 body.rtl .back-btn { left: auto; right: 0; }
 body.rtl .lang-btn { right: auto; left: 0; }
-body.rtl .verse-note { border-left: none; border-right: 2px solid #1D9E75; border-radius: var(--border-radius-md) 0 0 var(--border-radius-md); }
-body.rtl .alert { border-left: none; border-right: 2px solid #EF9F27; }
-body.rtl .alert.success { border-left: none; border-right: 2px solid #1D9E75; }
-body.rtl .val-input { text-align: left; }
-body.rtl .heir-frac { text-align: left; }
-body.rtl .tracker-content { padding-right: 12px; padding-left: 0; }
 
 .wrap{max-width:560px;margin:0 auto;padding:1.5rem 1rem; position: relative;}
 .hdr{text-align:center;margin-bottom:1.5rem;position:relative;}
 .back-btn{position:absolute;left:0;top:50%;transform:translateY(-50%);background:none;border:none;color:#1D9E75;font-size:14px;cursor:pointer;font-weight:500;display:none;font-family:inherit;}
-.back-btn:hover{text-decoration:underline;}\n.lang-btn{position:absolute;right:0;top:50%;transform:translateY(-50%);background:var(--color-background-secondary);border:1px solid var(--color-border-secondary);color:var(--color-text-primary);font-size:12px;padding:4px 10px;border-radius:16px;cursor:pointer;font-weight:600;font-family:inherit;}
-.lang-btn:hover{background:var(--color-border-tertiary);}
+.lang-btn{position:absolute;right:0;top:50%;transform:translateY(-50%);background:var(--color-background-secondary);border:1px solid var(--color-border-secondary);color:var(--color-text-primary);font-size:12px;padding:4px 10px;border-radius:16px;cursor:pointer;font-weight:600;font-family:inherit;}
 
 .hdr h1{font-size:20px;font-weight:500;color:var(--color-text-primary)}
 .hdr p{font-size:13px;color:var(--color-text-secondary);margin-top:4px}
-.arabic{font-size:22px;color:var(--color-text-secondary);margin-bottom:6px; font-family: sans-serif;}
+.arabic{font-size:22px;color:var(--color-text-secondary);margin-bottom:6px;}
 
-/* Grid Menu */
 .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:1rem;}
 .menu-card{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.5rem 1rem;text-align:center;cursor:pointer;transition:all 0.2s;}
 .menu-card:hover{border-color:#1D9E75;box-shadow:0 4px 12px rgba(29,158,117,0.1);background:#F0FDF4;}
 .menu-icon{font-size:28px;margin-bottom:8px;}
 .menu-title{font-size:15px;font-weight:500;color:var(--color-text-primary);}
 
-/* Step Progress & General UI */
 .prog{display:flex;gap:4px;margin-bottom:1.5rem}
 .prog-item{flex:1;text-align:center}
 .prog-bar{height:3px;border-radius:2px;margin-bottom:4px;background:var(--color-border-tertiary)}
 .prog-bar.active{background:#1D9E75}
-.prog-label{font-size:10px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.05em}
-.prog-label.active{color:#0F6E56}
 
 .card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem}
-.step-title{font-size:17px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
-.step-desc{font-size:13px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:1rem}
-.choices{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem}
-.choice-btn{padding:10px 24px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);font-size:14px;cursor:pointer;font-family:inherit;transition:all .15s}
-.choice-btn:hover{background:var(--color-background-secondary)}
-.choice-btn.sel{border:1.5px solid #1D9E75;background:#E1F5EE;color:#085041}
-.row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
-.row:last-child{border-bottom:none}
+.row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
 .row label{font-size:14px;color:var(--color-text-primary);flex:1;}
 
-.counter, .toggle{display:flex;align-items:center;gap:10px}
-.ctr-btn{width:28px;height:28px;border-radius:50%;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
-.ctr-btn:hover{background:var(--color-background-secondary)}
-.ctr-val{font-size:15px;font-weight:500;color:var(--color-text-primary);min-width:20px;text-align:center}
-.tog-btn{padding:6px 16px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);font-size:13px;cursor:pointer;font-family:inherit; transition:all 0.15s;}
-.tog-btn.on{border:1px solid #1D9E75;background:#E1F5EE;color:#085041}
-
-.val-input{width:120px;padding:8px 12px;border-radius:var(--border-radius-md);border:1px solid var(--color-border-secondary);font-size:15px;text-align:right;font-family:inherit;}
-.val-input:focus{outline:none;border-color:#1D9E75;box-shadow: 0 0 0 2px rgba(29,158,117,0.2);}
-
-.verse-note, .alert{margin-top:1rem;padding:10px 14px;border-radius:var(--border-radius-md);font-size:13px;line-height:1.6}
-.verse-note{background:var(--color-background-secondary);border-left:2px solid #1D9E75;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;color:var(--color-text-secondary);}
-.verse-ref{color:#0F6E56;font-weight:500}
-.alert{background:#FAEEDA;border-left:2px solid #EF9F27;color:#633806;}\n.alert.success{background:#E1F5EE;border-left:2px solid #1D9E75;color:#085041;}
+.val-input{width:120px;padding:8px 12px;border-radius:var(--border-radius-md);border:1px solid var(--color-border-secondary);font-size:15px;text-align:right;}
+.choice-btn{padding:8px 16px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;margin:4px;}
+.choice-btn.sel{border:1.5px solid #1D9E75;background:#E1F5EE;color:#085041}
 
 .nav{display:flex;justify-content:space-between;margin-top:12px; gap:8px;}
-.nav-btn{padding:9px 22px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);font-size:14px;cursor:pointer;font-family:inherit;font-weight:500;transition:all 0.15s; flex:1;}
-.nav-btn:hover:not(:disabled){background:var(--color-background-secondary)}
-.nav-btn.prim{border:0.5px solid #1D9E75;color:white;background:#1D9E75}
-.nav-btn.prim:hover:not(:disabled){background:#15805e}
-.nav-btn:disabled{opacity:.4;cursor:not-allowed}
+.nav-btn{padding:10px 22px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;flex:1;font-weight:500;}
+.nav-btn.prim{background:#1D9E75;color:white;border:none;}
 
-/* Results Formatting */
-.heir-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--border-radius-md);background:var(--color-background-secondary);margin-bottom:6px}
-.heir-info{flex:1}
-.heir-name{font-size:14px;color:var(--color-text-primary)}
-.heir-frac{text-align:right}
-.heir-f{font-size:16px;font-weight:500;color:var(--color-text-primary)}
-
-/* Trackers */
-.tracker-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; }
-.tracker-card { display: flex; flex-direction: column; border: 1px solid var(--color-border-secondary); border-radius: var(--border-radius-md); overflow: hidden; background: var(--color-background-primary); cursor: pointer; transition: all 0.2s; }
-.tracker-card.completed { background: #F0FDF4; border-color: #9FE1CB; opacity: 0.85; }
-.tracker-content { padding: 1rem; display: flex; align-items: center; gap: 12px; }
-.tracker-text { flex: 1; }
-.tracker-title { font-size: 15px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 4px; }
-.tracker-card.completed .tracker-title { text-decoration: line-through; color: var(--color-text-secondary); }
-.tracker-check { width: 26px; height: 26px; border: 2px solid var(--color-border-secondary); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: white; transition: all 0.2s; }
-.tracker-card.completed .tracker-check { background: #1D9E75; border-color: #1D9E75; color: white; }
-
-.placeholder-view{text-align:center;padding:3rem 1rem;}
+.heir-row{display:flex;justify-content:space-between;padding:10px;background:var(--color-background-secondary);border-radius:6px;margin-bottom:6px;}
+.tracker-card { border: 1px solid var(--color-border-secondary); padding: 1rem; border-radius: 8px; margin-bottom: 10px; cursor: pointer; display: flex; align-items: center; gap: 12px; }
+.tracker-card.completed { background: #F0FDF4; border-color: #9FE1CB; }
 </style>
 </head>
 <body>
 
 <div class="wrap">
   <div class="hdr">
-    <button id=\"btn-back\" class="back-btn" onclick="openMenu()">← Back</button>
-    <button id=\"btn-lang\" class="lang-btn" onclick="toggleLang()">اردو</button>
+    <button id="btn-back" class="back-btn" onclick="openMenu()">← Back</button>
+    <button id="btn-lang" class="lang-btn" onclick="toggleLang()">اردو</button>
     <div class="arabic">﷽</div>
     <h1 id="app-title">Islamic Knowledge Hub</h1>
-    <p id="app-desc">Select a tool to begin</p>
+    <p id="app-desc">Select a tool</p>
   </div>
   
   <div class="prog" id="prog" style="display:none"></div>
@@ -129,29 +80,34 @@ body.rtl .tracker-content { padding-right: 12px; padding-left: 0; }
 </div>
 
 <script>
-// ==== i18n DICTIONARY ====
+// ==== FRACTION ENGINE (FROM 700+ LINE VERSION) ====
+const gcd=(a,b)=>b===0?a:gcd(b,a%b);
+const F=(n,d)=>{if(n<=0||d<=0)return{n:0,d:1};const g=gcd(n,d);return{n:n/g,d:d/g}};
+const fstr=f=>f.n===0?'0':(f.d===1?`${f.n}`:`${f.n}/${f.d}`);
+
+// ==== i18n ====
 const DICT = {
   en: {
-    appTitle: "Islamic Knowledge Hub", appDesc: "Select a tool to begin", backMenu: "← Back to Menu", btnLang: "اردو",
-    menuInh: "Inheritance", menuZak: "Zakat", menuUmr: "Umrah Tracker", menuHaj: "Hajj Tracker",
-    btnBack: "← Back", btnNext: "Next →", btnStartOver: "↺ Start over", btnCalc: "Calculate →",
-    zTitle: "Zakat Calculator", zDesc: "2.5% obligatory charity", zSteps: ['Assets', 'Debts', 'Results'],
-    zS1Cash: "Cash and Bank", zS2Debt: "Debts", zS3Net: "Net Wealth", zS3Due: "Zakat Due",
-    iTitle: "Inheritance Calculator", iDesc: "Based on Surah An-Nisa", iSteps: ['Gender', 'Spouse', 'Children', 'Parents', 'Results'],
-    uTitle: "Umrah Tracker", hTitle: "Hajj Tracker",
-    uData: [{t:'Ihram', d:'Set intention'}, {t:'Tawaf', d:'7 Circuits'}, {t:'Sa\'i', d:'7 Walks'}, {t:'Halq', d:'Trim hair'}]
+    appTitle: "Islamic Knowledge Hub", menuInh: "Inheritance", menuZak: "Zakat", menuUmr: "Umrah Tracker",
+    btnBack: "← Back", btnNext: "Next →", btnCalc: "Calculate →", btnStartOver: "↺ Start Over",
+    zSteps: ['Assets', 'Nisab', 'Results'], zCash: "Cash & Bank", zGold: "Gold Value", zNisab: "Gold Price (per g)",
+    iSteps: ['Gender', 'Spouse', 'Family', 'Results'], iHus: "Husband Alive", iWife: "Wife Alive", iSons: "Sons", iDaus: "Daughters"
   },
   ur: {
-    appTitle: "مرکزِ علومِ اسلامیہ", appDesc: "شروع کرنے کے لیے ایک ٹول منتخب کریں", backMenu: "مینو پر واپس جائیں", btnLang: "English",
-    menuInh: "وراثت", menuZak: "زکوٰۃ", menuUmr: "عمرہ ٹریکر", menuHaj: "حج ٹریکر",
-    btnBack: "پیچھے", btnNext: "آگے", btnStartOver: "دوبارہ شروع کریں", btnCalc: "حساب لگائیں",
-    zTitle: "زکوٰۃ کیلکولیٹر", zDesc: "فرض زکوٰۃ کا حساب لگائیں", zSteps: ['اثاثے', 'قرضے', 'نتائج'],
-    iTitle: "وراثت کیلکولیٹر", iDesc: "سورۃ النساء کی روشنی میں", iSteps: ['جنس', 'شریک حیات', 'بچے', 'والدین', 'نتائج']
+    appTitle: "مرکزِ علومِ اسلامیہ", menuInh: "وراثت", menuZak: "زکوٰۃ", menuUmr: "عمرہ ٹریکر",
+    btnBack: "پیچھے", btnNext: "آگے", btnCalc: "حساب لگائیں", btnStartOver: "دوبارہ شروع کریں",
+    zSteps: ['اثاثے', 'نصاب', 'نتائج'], zCash: "نقد رقم", zGold: "سونے کی مالیت", zNisab: "سونے کی قیمت",
+    iSteps: ['جنس', 'شریک حیات', 'بچے', 'نتائج'], iHus: "شوہر زندہ ہے", iWife: "بیوی زندہ ہے", iSons: "بیٹے", iDaus: "بیٹیاں"
   }
 };
 
 let LANG = localStorage.getItem('appLang') || 'en';
-function t(key) { return (DICT[LANG] && DICT[LANG][key]) || DICT['en'][key] || key; }
+const t = k => (DICT[LANG][k] || DICT['en'][k] || k);
+
+// ==== STATE ====
+let currentTool = 'menu', step = 0;
+let S_ZAK = { cash: 0, gold: 0, goldPrice: 75 }; 
+let S_INH = { gender: 'm', spouse: false, sons: 0, daus: 0 };
 
 function toggleLang() {
   LANG = LANG === 'en' ? 'ur' : 'en';
@@ -159,131 +115,86 @@ function toggleLang() {
   renderApp();
 }
 
-// ==== STATE ====
-let currentTool = 'menu';
-let step = 0;
-let S_INH = { gender: null, hasSpouse: false, sons: 0, daughters: 0, father: false, mother: false };
-let S_ZAK = { cash: 0, debts: 0 };
-let S_TRACK = JSON.parse(localStorage.getItem('trackState')) || { umrah: [false, false, false, false] };
-
 function openMenu() { currentTool = 'menu'; step = 0; renderApp(); }
-function startTool(tool) { currentTool = tool; step = 0; renderApp(); }
 
 function renderApp() {
   document.body.className = LANG === 'ur' ? 'rtl' : '';
+  document.getElementById('app-title').textContent = t('appTitle');
+  document.getElementById('btn-lang').textContent = LANG === 'en' ? 'اردو' : 'English';
+  document.getElementById('btn-back').style.display = currentTool === 'menu' ? 'none' : 'block';
+  document.getElementById('btn-back').textContent = t('btnBack');
+
   const card = document.getElementById('card');
-  const prog = document.getElementById('prog');
-  const nav = document.getElementById('nav');
-  const back = document.getElementById('btn-back');
-  
-  document.getElementById('btn-lang').innerText = t('btnLang');
-  
   if (currentTool === 'menu') {
-    document.getElementById('app-title').textContent = t('appTitle');
-    document.getElementById('app-desc').textContent = t('appDesc');
-    back.style.display = 'none';
-    prog.style.display = 'none';
-    nav.style.display = 'none';
+    document.getElementById('prog').style.display = 'none';
+    document.getElementById('nav').style.display = 'none';
     card.innerHTML = `
       <div class="menu-grid">
-        <div class="menu-card" onclick="startTool('inheritance')">⚖️<br>${t('menuInh')}</div>
-        <div class="menu-card" onclick="startTool('zakat')">💰<br>${t('menuZak')}</div>
-        <div class="menu-card" onclick="startTool('umrah')">🕋<br>${t('menuUmr')}</div>
-        <div class="menu-card" onclick="startTool('hajj')">⛺<br>${t('menuHaj')}</div>
+        <div class="menu-card" onclick="currentTool='inheritance';step=0;renderApp()"><div class="menu-icon">⚖️</div>${t('menuInh')}</div>
+        <div class="menu-card" onclick="currentTool='zakat';step=0;renderApp()"><div class="menu-icon">💰</div>${t('menuZak')}</div>
+        <div class="menu-card" onclick="currentTool='umrah';renderApp()"><div class="menu-icon">🕋</div>${t('menuUmr')}</div>
       </div>`;
-    return;
-  }
-
-  back.style.display = 'block';
-  if (currentTool === 'zakat') renderZakat();
-  else if (currentTool === 'inheritance') renderInheritance();
-  else if (currentTool === 'umrah') renderTracker('umrah');
+  } else if (currentTool === 'zakat') renderZakat();
+  else if (currentTool === 'inheritance') renderInh();
 }
 
 function renderZakat() {
   const steps = t('zSteps');
   renderProg(steps);
-  const nav = document.getElementById('nav');
-  nav.style.display = 'flex';
-  
   let html = '';
   if (step === 0) {
-    html = `<h3>${t('zS1Cash')}</h3><input type="number" class="val-input" onchange="S_ZAK.cash=this.value" value="${S_ZAK.cash}">`;
+    html = `<div class="row"><label>${t('zCash')}</label><input type="number" class="val-input" value="${S_ZAK.cash}" oninput="S_ZAK.cash=this.value"></div>
+            <div class="row"><label>${t('zGold')}</label><input type="number" class="val-input" value="${S_ZAK.gold}" oninput="S_ZAK.gold=this.value"></div>`;
   } else if (step === 1) {
-    html = `<h3>${t('zS2Debt')}</h3><input type="number" class="val-input" onchange="S_ZAK.debts=this.value" value="${S_ZAK.debts}">`;
+    html = `<div class="row"><label>${t('zNisab')}</label><input type="number" class="val-input" value="${S_ZAK.goldPrice}" oninput="S_ZAK.goldPrice=this.value"></div>`;
   } else {
-    let net = S_ZAK.cash - S_ZAK.debts;
-    let due = net > 0 ? net * 0.025 : 0;
-    html = `<div class="heir-row"><span>${t('zS3Net')}</span><span>${net}</span></div>
-            <div class="heir-row" style="background:#E1F5EE"><strong>${t('zS3Due')}</strong><strong>${due.toFixed(2)}</strong></div>`;
+    let total = parseFloat(S_ZAK.cash) + parseFloat(S_ZAK.gold);
+    let nisabLimit = parseFloat(S_ZAK.goldPrice) * 87.48;
+    let due = total >= nisabLimit ? total * 0.025 : 0;
+    html = `<div class="heir-row"><span>Total</span><span>${total}</span></div>
+            <div class="heir-row" style="background:${total >= nisabLimit ? '#E1F5EE' : '#FAEEDA'}">
+              <span>${t('btnCalc')}</span><strong>${due.toFixed(2)}</strong>
+            </div>`;
   }
   document.getElementById('card').innerHTML = html;
   renderNav(steps.length);
 }
 
-function renderInheritance() {
-    const steps = t('iSteps');
-    renderProg(steps);
-    document.getElementById('nav').style.display = 'flex';
-    let html = `<h3>${steps[step]}</h3>`;
-    
-    if(step === 0) {
-        html += `<button class="choice-btn ${S_INH.gender==='m'?'sel':''}" onclick="S_INH.gender='m';renderApp()">Male</button>
-                 <button class="choice-btn ${S_INH.gender==='f'?'sel':''}" onclick="S_INH.gender='f';renderApp()">Female</button>`;
-    } else if(step === 4) {
-        html = `<div>Calculation based on Quranic shares... (Simplified)</div>`;
-    } else {
-        html += `<p>Enter details for step ${step}</p>`;
-    }
-    
-    document.getElementById('card').innerHTML = html;
-    renderNav(steps.length);
-}
-
-function renderTracker(type) {
-    const data = t('uData');
-    let html = '<div class="tracker-list">';
-    data.forEach((item, i) => {
-        const done = S_TRACK.umrah[i];
-        html += `
-            <div class="tracker-card ${done?'completed':''}" onclick="toggleStep(${i})">
-                <div class="tracker-content">
-                    <div class="tracker-check">${done?'✓':''}</div>
-                    <div class="tracker-text">
-                        <div class="tracker-title">${item.t}</div>
-                        <div class="tracker-desc">${item.d}</div>
-                    </div>
-                </div>
-            </div>`;
-    });
-    html += '</div>';
-    document.getElementById('card').innerHTML = html;
-    document.getElementById('nav').style.display = 'none';
-    document.getElementById('prog').style.display = 'none';
-}
-
-function toggleStep(i) {
-    S_TRACK.umrah[i] = !S_TRACK.umrah[i];
-    localStorage.setItem('trackState', JSON.stringify(S_TRACK));
-    renderApp();
+function renderInh() {
+  const steps = t('iSteps');
+  renderProg(steps);
+  let html = '';
+  if (step === 0) {
+    html = `<button class="choice-btn ${S_INH.gender==='m'?'sel':''}" onclick="S_INH.gender='m';renderApp()">Male</button>
+            <button class="choice-btn ${S_INH.gender==='f'?'sel':''}" onclick="S_INH.gender='f';renderApp()">Female</button>`;
+  } else if (step === 1) {
+    let label = S_INH.gender === 'm' ? t('iWife') : t('iHus');
+    html = `<div class="row"><label>${label}</label><button class="choice-btn ${S_INH.spouse?'sel':''}" onclick="S_INH.spouse=!S_INH.spouse;renderApp()">Toggle</button></div>`;
+  } else if (step === 2) {
+    html = `<div class="row"><label>${t('iSons')}</label><input type="number" class="val-input" value="${S_INH.sons}" oninput="S_INH.sons=this.value"></div>
+            <div class="row"><label>${t('iDaus')}</label><input type="number" class="val-input" value="${S_INH.daus}" oninput="S_INH.daus=this.value"></div>`;
+  } else {
+    // Basic fraction logic
+    let share = S_INH.spouse ? (S_INH.sons+S_INH.daus > 0 ? '1/8' : '1/4') : 'Full to Residuary';
+    html = `<div class="heir-row"><span>Spouse Share</span><span>${share}</span></div>`;
+  }
+  document.getElementById('card').innerHTML = html;
+  renderNav(steps.length);
 }
 
 function renderProg(arr) {
-  const p = document.getElementById('prog');
-  p.style.display = 'flex';
+  const p = document.getElementById('prog'); p.style.display = 'flex';
   p.innerHTML = arr.map((s,i)=>`<div class="prog-item"><div class="prog-bar ${i<=step?'active':''}"></div></div>`).join('');
 }
 
 function renderNav(max) {
-  const n = document.getElementById('nav');
-  const nextTxt = step === max - 1 ? t('btnStartOver') : (step === max - 2 ? t('btnCalc') : t('btnNext'));
-  n.innerHTML = `
-    <button class="nav-btn" onclick="if(step>0)step--;renderApp()">Back</button>
-    <button class="nav-btn prim" onclick="if(step<${max-1}){step++;renderApp()}else{openMenu()}">${nextTxt}</button>`;
+  const n = document.getElementById('nav'); n.style.display = 'flex';
+  const nTxt = step === max - 1 ? t('btnStartOver') : (step === max - 2 ? t('btnCalc') : t('btnNext'));
+  n.innerHTML = `<button class="nav-btn" onclick="if(step>0){step--;renderApp()}">${t('btnBack')}</button>
+                 <button class="nav-btn prim" onclick="if(step<${max-1}){step++;renderApp()}else{openMenu()}">${nTxt}</button>`;
 }
 
-// Initial Run
-renderApp();
+openMenu();
 </script>
 </body>
 </html>
